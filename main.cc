@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <map>
 #include "game.h"
 using namespace std;
 
@@ -31,19 +32,21 @@ int main(int argc, char *argv[]) {
     int n = 1;
     if ((cmd[0] >= '0') && (cmd[0] <= '9')) {
       int i = 1;
-      int n = stoi(cmd[0]);
+      int n = cmd[0] - '0';
       while ((cmd[i] >= '0') && (cmd[i] <= '9')){
-        n = n * 10 + stoi(cmd[i]);
+        n = n * 10 + (cmd[i] - '0');
         ++i;
       }
       cmd = cmd.substr(i);
     }
     try{
+      map<string, vector<string>>::iterator it;
       for(it = commands.begin(); it != commands.end(); it++) {
         string key = it->first;
         vector<string> command = it->second;
-        for(c = command.begin(); c != command.end(); c++) {
-          if (cmd == c){
+        int size = command.size();
+        for(int i = 0; i < size; ++i){
+          if (cmd == command.at(i)){
             throw key;
           }
         }
@@ -60,6 +63,7 @@ int main(int argc, char *argv[]) {
         g.processCommand(comm, n, turn);
       }
     }
+  }
   }
   catch (ios::failure &) {}
 }
