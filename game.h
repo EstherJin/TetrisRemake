@@ -17,7 +17,7 @@ public:
 	void restart();
 	void print(std::ostream &out);
 	void processCommand(std::string command, int repeat, int board);
-	void processCommand(std::string command, std::string filename, int repeat, int board)
+	void processCommand(std::string command, std::string filename, int repeat, int board);
 };
 
 #endif
