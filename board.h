@@ -7,19 +7,20 @@
 #include "cell.h"
 #include "block2.h"
 #include "level.h"
+#include "stringgenerator.h"
 
 class Block1;
+class Row;
 
 class Board {
 	const gridRows = 18;
-	const gridColumns = 11;
-	std::vector<std::vector<Cell>> grid;
+	std::vector<Row> grid;
 	std::vector<Block2> activeBlocks;
 	int score = 0;
 	Level lvl;
 	std::unique_ptr<Block1> currentBlock;
 	std::unique_ptr<Block1> nextBlock;
-	std::unique_ptr<StringGenerator> sg;
+	StringGenerator sg;
 public:
 	Board(int level = 0);
 	virtual ~Board() = 0;
