@@ -2,8 +2,8 @@
 #define COORD_H
 
 struct Coordinates {
-  int x;
-  int y;
+  int row;
+  int col;
 };
 
 #endif

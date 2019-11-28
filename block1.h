@@ -2,6 +2,7 @@
 #define BLOCK1_H
 #include <vector>
 #include "coords.h"
+#include "subject.h"
 using namespace std;
 
 class Block1{
@@ -18,12 +19,13 @@ public:
   virtual vector<Coordinates> movePos(int shift);
   virtual vector<Coordinates> turnPos(int shift)=0;
   vector<Coordinates> downPos(int shift);
+  char getType();
   void print(){
     for(int i = 0; i < 4; ++i){
       cout << "[";
-      cout << coords.at(i).x;
+      cout << coords.at(i).row;
       cout << ",";
-      cout << coords.at(i).y;
+      cout << coords.at(i).col;
       cout << "],";
     }
     cout << endl;
@@ -34,15 +36,25 @@ Block1::Block1(int position, char c): position{position}, c{c}{}
 
 Block1::~Block1(){}
 
+char Block1::getType(){
+  return c;
+}
+
 void Block1::move(int shift){
   for (int i = 0; i < 4; ++i){
-    coords.at(i).y += shift;
+    State stat = {' ', coords, false};
+    setState(stat);
+    notifyObservers();
+    coords.at(i).col += shift;
+    stat = {c, coords, true};
+    setState(stat);
+    notifyObservers();
   }
 }
 vector<Coordinates> Block1::movePos(int shift){
   vector<Coordinates> cds = coords;
   for (int i = 0; i < 4; ++i){
-    cds.at(i).y += shift;
+    cds.at(i).col += shift;
   }
   return cds;
 }
@@ -50,7 +62,13 @@ vector<Coordinates> Block1::movePos(int shift){
 void Block1::down(int shift){
   int size = coords.size();
   for (int i = 0; i < size; ++i){
-    coords.at(i).x += shift;
+    State stat = {' ', coords, false};
+    setState(stat);
+    notifyObservers();
+    coords.at(i).row += shift;
+    stat = {c, coords, true};
+    setState(stat);
+    notifyObservers();
   }
 }
 
@@ -58,7 +76,7 @@ vector<Coordinates> Block1::downPos(int shift){
   vector<Coordinates> cds = coords;
   int size = coords.size();
   for (int i = 0; i < size; ++i){
-    cds.at(i).x += shift;
+    cds.at(i).row += shift;
   }
   return cds;
 }
@@ -102,12 +120,36 @@ S::S(): Block1{0, 'S'} {
 void S::turn(int shift){
   if ((shift % 2) != 0){
     if (position == 0){
-      coords.at(2).y -= 2;
-      coords.at(3).x -= 2;
+      State stat = {' ', coords.at(2), false};
+      setState(stat);
+      notifyObservers();
+      coords.at(2).col -= 2;
+      stat = {c, coords.at(2), true};
+      setState(stat);
+      notifyObservers();
+      stat = {' ', coords.at(3), false};
+      setState(stat);
+      notifyObservers();
+      coords.at(3).row -= 2;
+      stat = {c, coords.at(3), true};
+      setState(stat);
+      notifyObservers();
       position = 1;
     } else {
-      coords.at(2).y += 2;
-      coords.at(3).x += 2;
+      State stat = {' ', coords.at(2), false};
+      setState(stat);
+      notifyObservers();
+      coords.at(2).col += 2;
+      stat = {c, coords.at(2), true};
+      setState(stat);
+      notifyObservers();
+      stat = {' ', coords.at(3), false};
+      setState(stat);
+      notifyObservers();
+      coords.at(3).row += 2;
+      stat = {c, coords.at(3), true};
+      setState(stat);
+      notifyObservers();
       position = 0;
     }
   }
@@ -117,11 +159,11 @@ vector<Coordinates> S::turnPos(int shift){
   vector<Coordinates> cds = coords;
   if ((shift % 2) != 0){
     if (position == 0){
-      cds.at(2).y -= 2;
-      cds.at(3).x -= 2;
+      cds.at(2).col -= 2;
+      cds.at(3).row -= 2;
     } else {
-      cds.at(2).y += 2;
-      cds.at(3).x += 2;
+      cds.at(2).col += 2;
+      cds.at(3).row += 2;
     }
   }
   return cds;
@@ -136,21 +178,45 @@ public:
 };
 
 Z::Z(): Block1{0, 'Z'} {
+  coords.emplace_back(Coordinates {2,0});
   coords.emplace_back(Coordinates {2,1});
-  coords.emplace_back(Coordinates {2,2});
-  coords.emplace_back(Coordinates {3,0});
   coords.emplace_back(Coordinates {3,1});
+  coords.emplace_back(Coordinates {3,2});
 }
 
 void Z::turn(int shift){
   if ((shift % 2) != 0){
     if (position == 0){
-      coords.at(1).y += 2;
-      coords.at(4).x += 2;
+      State stat = {' ', coords.at(1), false};
+      setState(stat);
+      notifyObservers();
+      coords.at(1).col += 2;
+      stat = {c, coords.at(1), true};
+      setState(stat);
+      notifyObservers();
+      stat = {' ', coords.at(4), false};
+      setState(stat);
+      notifyObservers();
+      coords.at(4).row += 2;
+      stat = {c, coords.at(4), true};
+      setState(stat);
+      notifyObservers();
       position = 1;
     } else {
-      coords.at(1).y -= 2;
-      coords.at(4).x -= 2;
+      State stat = {' ', coords.at(1), false};
+      setState(stat);
+      notifyObservers();
+      coords.at(1).col -= 2;
+      stat = {c, coords.at(1), true};
+      setState(stat);
+      notifyObservers();
+      stat = {' ', coords.at(4), false};
+      setState(stat);
+      notifyObservers();
+      coords.at(4).row -= 2;
+      stat = {c, coords.at(4), true};
+      setState(stat);
+      notifyObservers();
       position = 0;
     }
   }
@@ -160,11 +226,11 @@ vector<Coordinates> Z::turnPos(int shift){
   vector<Coordinates> cds = coords;
   if ((shift % 2) != 0){
     if (position == 0){
-      cds.at(1).y += 2;
-      cds.at(4).x += 2;
+      cds.at(1).col += 2;
+      cds.at(4).row += 2;
     } else {
-      cds.at(1).y -= 2;
-      cds.at(4).x -= 2;
+      cds.at(1).col -= 2;
+      cds.at(4).row -= 2;
     }
   }
   return cds;
@@ -188,20 +254,56 @@ I::I(): Block1{0, 'I'} {
 void I::turn(int shift){
   if ((shift % 2) != 0){
     if (position == 0){
-      coords.at(2).x -= 1;
-      coords.at(2).y -= 1;
-      coords.at(3).x -= 1;
-      coords.at(3).y -= 2;
-      coords.at(4).x -= 1;
-      coords.at(4).y -= 3;
+      State stat = {' ', coords.at(2), false};
+      setState(stat);
+      notifyObservers();
+      coords.at(2).row -= 1;
+      coords.at(2).col -= 1;
+      stat = {c, coords.at(2), true};
+      setState(stat);
+      notifyObservers();
+      State stat = {' ', coords.at(3), false};
+      setState(stat);
+      notifyObservers();
+      coords.at(3).row -= 1;
+      coords.at(3).col -= 2;
+      stat = {c, coords.at(3), true};
+      setState(stat);
+      notifyObservers();
+      State stat = {' ', coords.at(4), false};
+      setState(stat);
+      notifyObservers();
+      coords.at(4).row -= 1;
+      coords.at(4).col -= 3;
+      stat = {c, coords.at(4), true};
+      setState(stat);
+      notifyObservers();
       position = 1;
     } else {
-      coords.at(2).x += 1;
-      coords.at(2).y += 1;
-      coords.at(3).x += 1;
-      coords.at(3).y += 2;
-      coords.at(4).x += 1;
-      coords.at(4).y += 3;
+      State stat = {' ', coords.at(2), false};
+      setState(stat);
+      notifyObservers();
+      coords.at(2).row += 1;
+      coords.at(2).col += 1;
+      stat = {c, coords.at(2), true};
+      setState(stat);
+      notifyObservers();
+      State stat = {' ', coords.at(3), false};
+      setState(stat);
+      notifyObservers();
+      coords.at(3).row += 1;
+      coords.at(3).col += 2;
+      stat = {c, coords.at(3), true};
+      setState(stat);
+      notifyObservers();
+      State stat = {' ', coords.at(4), false};
+      setState(stat);
+      notifyObservers();
+      coords.at(4).row += 1;
+      coords.at(4).col += 3;
+      stat = {c, coords.at(4), true};
+      setState(stat);
+      notifyObservers();
       position = 0;
     }
   }
@@ -211,19 +313,19 @@ vector<Coordinates> I::turnPos(int shift){
   vector<Coordinates> cds = coords;
   if ((shift % 2) != 0){
     if (position == 0){
-      cds.at(2).x -= 1;
-      cds.at(2).y -= 1;
-      cds.at(3).x -= 1;
-      cds.at(3).y -= 2;
-      cds.at(4).x -= 1;
-      cds.at(4).y -= 3;
+      cds.at(2).row -= 1;
+      cds.at(2).col -= 1;
+      cds.at(3).row -= 1;
+      cds.at(3).col -= 2;
+      cds.at(4).row -= 1;
+      cds.at(4).col -= 3;
     } else {
-      cds.at(2).x += 1;
-      cds.at(2).y += 1;
-      cds.at(3).x += 1;
-      cds.at(3).y += 2;
-      cds.at(4).x += 1;
-      cds.at(4).y += 3;
+      cds.at(2).row += 1;
+      cds.at(2).col += 1;
+      cds.at(3).row += 1;
+      cds.at(3).col += 2;
+      cds.at(4).row += 1;
+      cds.at(4).col += 3;
     }
   }
   return cds;
@@ -248,26 +350,98 @@ void J::turn(int shift){
   shift = shift % 4;
   while (shift > 0){
     if (position == 0){
-      coords.at(3).x -= 2;
-      coords.at(4).x -= 2;
-      coords.at(4).y -= 2;
+      State stat = {' ', coords.at(3), false};
+      setState(stat);
+      notifyObservers();
+      coords.at(3).row -= 2;
+      stat = {c, coords.at(3), true};
+      setState(stat);
+      notifyObservers();
+      stat = {' ', coords.at(4), false};
+      setState(stat);
+      notifyObservers();
+      coords.at(4).row -= 2;
+      coords.at(4).col -= 2;
+      stat = {c, coords.at(4), true};
+      setState(stat);
+      notifyObservers();
     } else if (position == 1) {
-      coords.at(2).y += 2;
-      coords.at(3).x += 1;
-      coords.at(3).y += 1;
-      coords.at(4).x += 1;
-      coords.at(4).y += 1;
+      State stat = {' ', coords.at(2), false};
+      setState(stat);
+      notifyObservers();
+      coords.at(2).col += 2;
+      stat = {c, coords.at(2), true};
+      setState(stat);
+      notifyObservers();
+      stat = {' ', coords.at(3), false};
+      setState(stat);
+      notifyObservers();
+      coords.at(3).row += 1;
+      coords.at(3).col += 1;
+      stat = {c, coords.at(3), true};
+      setState(stat);
+      notifyObservers();
+      stat = {' ', coords.at(4), false};
+      setState(stat);
+      notifyObservers();
+      coords.at(4).row += 1;
+      coords.at(4).col += 1;
+      stat = {c, coords.at(4), true};
+      setState(stat);
+      notifyObservers();
     } else if (position == 2) {
-      coords.at(1).x += 1;
-      coords.at(2).y -= 1;
-      coords.at(3).x -= 1;
-      coords.at(3).y -= 1;
+      State stat = {' ', coords.at(1), false};
+      setState(stat);
+      notifyObservers();
+      coords.at(1).row += 1;
+      stat = {c, coords.at(1), true};
+      setState(stat);
+      notifyObservers();
+      stat = {' ', coords.at(2), false};
+      setState(stat);
+      notifyObservers();
+      coords.at(2).col -= 1;
+      stat = {c, coords.at(2), true};
+      setState(stat);
+      notifyObservers();
+      stat = {' ', coords.at(3), false};
+      setState(stat);
+      notifyObservers();
+      coords.at(3).row -= 1;
+      coords.at(3).col -= 1;
+      tat = {c, coords.at(3), true};
+      setState(stat);
+      notifyObservers();
     } else {
-      coords.at(1).x -= 1;
-      coords.at(2).y -= 1;
-      coords.at(3).x += 2;
-      coords.at(4).x += 1;
-      coords.at(4).y += 1;
+      State stat = {' ', coords.at(1), false};
+      setState(stat);
+      notifyObservers();
+      coords.at(1).row -= 1;
+      stat = {c, coords.at(1), true};
+      setState(stat);
+      notifyObservers();
+      stat = {' ', coords.at(2), false};
+      setState(stat);
+      notifyObservers();
+      coords.at(2).col -= 1;
+      stat = {c, coords.at(2), true};
+      setState(stat);
+      notifyObservers();
+      stat = {' ', coords.at(3), false};
+      setState(stat);
+      notifyObservers();
+      coords.at(3).row += 2;
+      stat = {c, coords.at(3), true};
+      setState(stat);
+      notifyObservers();
+      stat = {' ', coords.at(4), false};
+      setState(stat);
+      notifyObservers();
+      coords.at(4).row += 1;
+      coords.at(4).col += 1;
+      stat = {c, coords.at(4), true};
+      setState(stat);
+      notifyObservers();
     }
     position = (position + 1) % 4;
     --shift;
@@ -279,26 +453,26 @@ vector<Coordinates> J::turnPos(int shift){
   shift = shift % 4;
   while (shift > 0){
     if (position == 0){
-      cds.at(3).x -= 2;
-      cds.at(4).x -= 2;
-      cds.at(4).y -= 2;
+      cds.at(3).row -= 2;
+      cds.at(4).row -= 2;
+      cds.at(4).col -= 2;
     } else if (position == 1) {
-      cds.at(2).y += 2;
-      cds.at(3).x += 1;
-      cds.at(3).y += 1;
-      cds.at(4).x += 1;
-      cds.at(4).y += 1;
+      cds.at(2).col += 2;
+      cds.at(3).row += 1;
+      cds.at(3).col += 1;
+      cds.at(4).row += 1;
+      cds.at(4).col += 1;
     } else if (position == 2) {
-      cds.at(1).x += 1;
-      cds.at(2).y -= 1;
-      cds.at(3).x -= 1;
-      cds.at(3).y -= 1;
+      cds.at(1).row += 1;
+      cds.at(2).col -= 1;
+      cds.at(3).row -= 1;
+      cds.at(3).col -= 1;
     } else {
-      cds.at(1).x -= 1;
-      cds.at(2).y -= 1;
-      cds.at(3).x += 2;
-      cds.at(4).x += 1;
-      cds.at(4).y += 1;
+      cds.at(1).row -= 1;
+      cds.at(2).col -= 1;
+      cds.at(3).row += 2;
+      cds.at(4).row += 1;
+      cds.at(4).col += 1;
     }
     --shift;
   }
@@ -324,26 +498,92 @@ void L::turn(int shift){
   shift = shift % 4;
   while (shift > 0){
     if (position == 0){
-      coords.at(1).y -= 2;
-      coords.at(4).x -= 2;
-      coords.at(4).y -= 2;
+      State stat = {' ', coords.at(1), false};
+      setState(stat);
+      notifyObservers();
+      coords.at(1).col -= 2;
+      stat = {c, coords.at(1), true};
+      setState(stat);
+      notifyObservers();
+      stat = {' ', coords.at(4), false};
+      setState(stat);
+      notifyObservers();
+      coords.at(4).row -= 2;
+      coords.at(4).col -= 2;
+      stat = {' ', coords.at(4), false};
+      setState(stat);
+      notifyObservers();
     } else if (position == 1) {
-      coords.at(3).x -= 1;
-      coords.at(3).y += 1;
-      coords.at(4).x += 1;
-      coords.at(4).y += 1;
+      State stat = {' ', coords.at(3), false};
+      setState(stat);
+      notifyObservers();
+      coords.at(3).row -= 1;
+      coords.at(3).col += 1;
+      stat = {c, coords.at(3), true};
+      setState(stat);
+      notifyObservers();
+      stat = {' ', coords.at(4), false};
+      setState(stat);
+      notifyObservers();
+      coords.at(4).row += 1;
+      coords.at(4).col += 1;
+      stat = {' ', coords.at(4), false};
+      setState(stat);
+      notifyObservers();
     } else if (position == 2) {
-      coords.at(1).x -= 1;
-      coords.at(2).y += 1;
-      coords.at(3).x -= 1;
-      coords.at(3).y -= 1;
+      State stat = {' ', coords.at(1), false};
+      setState(stat);
+      notifyObservers();
+      coords.at(1).row -= 1;
+      stat = {c, coords.at(1), true};
+      setState(stat);
+      notifyObservers();
+      stat = {' ', coords.at(2), false};
+      setState(stat);
+      notifyObservers();
+      coords.at(2).col += 1;
+      stat = {c, coords.at(2), true};
+      setState(stat);
+      notifyObservers();
+      stat = {' ', coords.at(3), false};
+      setState(stat);
+      notifyObservers();
+      coords.at(3).row -= 1;
+      coords.at(3).col -= 1;
+      stat = {c, coords.at(3), true};
+      setState(stat);
+      notifyObservers();
     } else {}
-      coords.at(1).x += 1;
-      coords.at(1).y += 2;
-      coords.at(2).y -= 1;
-      coords.at(3).x += 2;
-      coords.at(4).x += 1;
-      coords.at(4).y += 1;
+      State stat = {' ', coords.at(1), false};
+      setState(stat);
+      notifyObservers();
+      coords.at(1).row += 1;
+      coords.at(1).col += 2;
+      stat = {c, coords.at(1), true};
+      setState(stat);
+      notifyObservers();
+      stat = {' ', coords.at(2), false};
+      setState(stat);
+      notifyObservers();
+      coords.at(2).col -= 1;
+      stat = {c, coords.at(2), true};
+      setState(stat);
+      notifyObservers();
+      stat = {' ', coords.at(3), false};
+      setState(stat);
+      notifyObservers();
+      coords.at(3).row += 2;
+      stat = {c, coords.at(3), true};
+      setState(stat);
+      notifyObservers();
+      stat = {' ', coords.at(4), false};
+      setState(stat);
+      notifyObservers();
+      coords.at(4).row += 1;
+      coords.at(4).col += 1;
+      stat = {c, coords.at(4), true};
+      setState(stat);
+      notifyObservers();
     }
     --shift;
     position = (position + 1) % 4;
@@ -355,26 +595,92 @@ vector<Coordinates> L::turnPos(int shift){
   shift = shift % 4;
   while (shift > 0){
     if (position == 0){
-      coords.at(1).y -= 2;
-      coords.at(4).x -= 2;
-      coords.at(4).y -= 2;
+      State stat = {' ', coords.at(1), false};
+      setState(stat);
+      notifyObservers();
+      coords.at(1).col -= 2;
+      stat = {c, coords.at(1), true};
+      setState(stat);
+      notifyObservers();
+      stat = {' ', coords.at(4), false};
+      setState(stat);
+      notifyObservers();
+      coords.at(4).row -= 2;
+      coords.at(4).col -= 2;
+      stat = {c, coords.at(4), true};
+      setState(stat);
+      notifyObservers();
     } else if (position == 1) {
-      coords.at(3).x -= 1;
-      coords.at(3).y += 1;
-      coords.at(4).x += 1;
-      coords.at(4).y += 1;
+      State stat = {' ', coords.at(3), false};
+      setState(stat);
+      notifyObservers();
+      coords.at(3).row -= 1;
+      coords.at(3).col += 1;
+      stat = {c, coords.at(3), true};
+      setState(stat);
+      notifyObservers();
+      stat = {' ', coords.at(4), false};
+      setState(stat);
+      notifyObservers();
+      coords.at(4).row += 1;
+      coords.at(4).col += 1;
+      stat = {c, coords.at(4), true};
+      setState(stat);
+      notifyObservers();
     } else if (position == 2) {
-      coords.at(1).x -= 1;
-      coords.at(2).y += 1;
-      coords.at(3).x -= 1;
-      coords.at(3).y -= 1;
-    } else {}
-      coords.at(1).x += 1;
-      coords.at(1).y += 2;
-      coords.at(2).y -= 1;
-      coords.at(3).x += 2;
-      coords.at(4).x += 1;
-      coords.at(4).y += 1;
+      State stat = {' ', coords.at(1), false};
+      setState(stat);
+      notifyObservers();
+      coords.at(1).row -= 1;
+      stat = {c, coords.at(1), true};
+      setState(stat);
+      notifyObservers();
+      stat = {' ', coords.at(2), false};
+      setState(stat);
+      notifyObservers();
+      coords.at(2).col += 1;
+      stat = {c, coords.at(2), true};
+      setState(stat);
+      notifyObservers();
+      stat = {' ', coords.at(3), false};
+      setState(stat);
+      notifyObservers();
+      coords.at(3).row -= 1;
+      coords.at(3).col -= 1;
+      stat = {c, coords.at(3), true};
+      setState(stat);
+      notifyObservers();
+    } else {
+      State stat = {' ', coords.at(1), false};
+      setState(stat);
+      notifyObservers();
+      coords.at(1).row += 1;
+      coords.at(1).col += 2;
+      stat = {c, coords.at(1), true};
+      setState(stat);
+      notifyObservers();
+      stat = {' ', coords.at(2), false};
+      setState(stat);
+      notifyObservers();
+      coords.at(2).col -= 1;
+      stat = {c, coords.at(2), true};
+      setState(stat);
+      notifyObservers();
+      stat = {' ', coords.at(3), false};
+      setState(stat);
+      notifyObservers();
+      coords.at(3).row += 2;
+      stat = {c, coords.at(3), true};
+      setState(stat);
+      notifyObservers();
+      stat = {' ', coords.at(4), false};
+      setState(stat);
+      notifyObservers();
+      coords.at(4).row += 1;
+      coords.at(4).col += 1;
+      stat = {c, coords.at(4), true};
+      setState(stat);
+      notifyObservers();
     }
     --shift;
   }
@@ -400,21 +706,69 @@ void T::turn(int shift){
   shift = shift % 4;
   while (shift > 0){
     if (position == 0){
-      coords.at(3).x -= 1;
-      coords.at(3).y -= 1;
+      State stat = {' ', coords.at(3), false};
+      setState(stat);
+      notifyObservers();
+      coords.at(3).row -= 1;
+      coords.at(3).col -= 1;
+      stat = {c, coords.at(3), true};
+      setState(stat);
+      notifyObservers();
     } else if (position == 1) {
-      coords.at(1).x += 1;
-      coords.at(3).x += 2;
-      coords.at(3).y += 1;
+      State stat = {' ', coords.at(1), false};
+      setState(stat);
+      notifyObservers();
+      coords.at(1).row += 1;
+      stat = {c, coords.at(1), true};
+      setState(stat);
+      notifyObservers();
+      stat = {' ', coords.at(3), false};
+      setState(stat);
+      notifyObservers();
+      coords.at(3).row += 2;
+      coords.at(3).col += 1;
+      stat = {c, coords.at(3), true};
+      setState(stat);
+      notifyObservers();
     } else if (position == 2) {
-      coords.at(1).x -= 1;
-      coords.at(3).x -= 2;
-      coords.at(3).y -= 2;
-      coords.at(4).y -= 1;
+      State stat = {' ', coords.at(1), false};
+      setState(stat);
+      notifyObservers();
+      coords.at(1).row -= 1;
+      stat = {c, coords.at(1), true};
+      setState(stat);
+      notifyObservers();
+      stat = {' ', coords.at(3), false};
+      setState(stat);
+      notifyObservers();
+      coords.at(3).row -= 2;
+      coords.at(3).col -= 2;
+      stat = {c, coords.at(3), true};
+      setState(stat);
+      notifyObservers();
+      stat = {' ', coords.at(4), false};
+      setState(stat);
+      notifyObservers();
+      coords.at(4).col -= 1;
+      stat = {c, coords.at(4), true};
+      setState(stat);
+      notifyObservers();
     } else {
-      coords.at(3).x += 1;
-      coords.at(3).y += 2;
-      coords.at(4).y += 1;
+      State stat = {' ', coords.at(3), false};
+      setState(stat);
+      notifyObservers();
+      coords.at(3).row += 1;
+      coords.at(3).col += 2;
+      stat = {c, coords.at(3), true};
+      setState(stat);
+      notifyObservers();
+      stat = {' ', coords.at(4), false};
+      setState(stat);
+      notifyObservers();
+      coords.at(4).col += 1;
+      stat = {c, coords.at(4), true};
+      setState(stat);
+      notifyObservers();
     }
     position = (position + 1) % 4;
     --shift;
@@ -426,21 +780,21 @@ vector<Coordinates> T::turnPos(int shift){
   shift = shift % 4;
   while (shift > 0){
     if (position == 0){
-      coords.at(3).x -= 1;
-      coords.at(3).y -= 1;
+      coords.at(3).row -= 1;
+      coords.at(3).col -= 1;
     } else if (position == 1) {
-      coords.at(1).x += 1;
-      coords.at(3).x += 2;
-      coords.at(3).y += 1;
+      coords.at(1).row += 1;
+      coords.at(3).row += 2;
+      coords.at(3).col += 1;
     } else if (position == 2) {
-      coords.at(1).x -= 1;
-      coords.at(3).x -= 2;
-      coords.at(3).y -= 2;
-      coords.at(4).y -= 1;
+      coords.at(1).row -= 1;
+      coords.at(3).row -= 2;
+      coords.at(3).col -= 2;
+      coords.at(4).col -= 1;
     } else {
-      coords.at(3).x += 1;
-      coords.at(3).y += 2;
-      coords.at(4).y += 1;
+      coords.at(3).row += 1;
+      coords.at(3).col += 2;
+      coords.at(4).col += 1;
     }
     --shift;
   }
