@@ -5,7 +5,9 @@
 #include "game.h"
 using namespace std;
 
-Game::Game(int startLevel): brd1{new Board(startLevel)}, brd2{new Board(startLevel)} {}
+Game::Game(int startLevel): brd1{new Board(startLevel)}, brd2{new Board(startLevel)} {
+	brd1->getNextBlock();
+}
 
 void Game::restart() {
 	brd1 = new Board();
@@ -35,10 +37,12 @@ void Game::processCommand(string command, int repeat, int board) {
 		tmp->turnBlock(repeat);
 	else if (command == "counterclockwise")
 		tmp->turnBlock(repeat * -1);
-	else if (command == "drop")
+	else if (command == "drop") {
 		tmp->dropBlock();
 		int score = tmp->getScore();
 		if (score > highscore) highscore = score;
+		// TO DO: activate special effects if lines cleared
+	}
 	else if (command == "levelup")
 		tmp->changeLevel(repeat);
 	else if (command == "leveldown")
@@ -59,5 +63,4 @@ void Game::processCommand(string command, string filename, int repeat, int board
 
 	if (command == "norandom")
 		tmp->changeLevel(0, false, filename);
-	// TO DO: sequence? 
 }
