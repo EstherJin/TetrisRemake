@@ -26,6 +26,8 @@ Board::Board(int level) {
 	nextBlock = nullptr;
 }
 
+Board::~Board() {}
+
 string Board::print(bool blind) {
 	char type = ' ';
 	if (nextBlock) type = nextBlock->getType();
