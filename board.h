@@ -27,8 +27,8 @@ public:
 	virtual std::string print(bool blind);
 	void turnBlock(int amount);
 	virtual void moveBlock(int amount);
-	virtual void downBlock(int amount);
-	int dropBlock(); // returns number of lines cleared
+	void downBlock(int amount);
+	virtual int dropBlock(); // returns number of lines cleared
 	void changeLevel(int direction, bool random, std::string filename);
 	int getScore();
 	void getNextBlock();
