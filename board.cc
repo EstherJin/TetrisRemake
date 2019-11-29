@@ -73,7 +73,9 @@ void Board::downBlock(int amount) {
 	}
 }
 
-int Board::dropBlock()
+int Board::dropBlock() {
+	// TO DO:
+}
 
 void Board::changeLevel(int direction, bool random, string filename) {
 	if (random) {

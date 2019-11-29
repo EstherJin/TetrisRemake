@@ -2,16 +2,17 @@
 #include <memory>
 #include <iostream>
 #include "board.h"
+#include "basicboard.h"
 #include "game.h"
 using namespace std;
 
-Game::Game(int startLevel): brd1{new Board(startLevel)}, brd2{new Board(startLevel)} {
+Game::Game(int startLevel): brd1{new BasicBoard(startLevel)}, brd2{new BasicBoard(startLevel)} {
 	brd1->getNextBlock();
 }
 
 void Game::restart() {
-	brd1 = new Board();
-	brd2 = new Board();
+	brd1 = new BasicBoard();
+	brd2 = new BasicBoard();
 }
 
 void Game::print(ostream &out) {
