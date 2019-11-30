@@ -9,8 +9,12 @@ char Block1::getType(){
   return c;
 }
 
-vector<Coordinates> getPos(){
+vector<Coordinates> Block1::getPos(){
   return coords;
+}
+
+bool Block1::origPos(){
+  return (position == 0);
 }
 
 void Block1::move(int shift){

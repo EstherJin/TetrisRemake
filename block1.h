@@ -21,6 +21,7 @@ public:
   vector<Coordinates> downPos(int shift);
   char getType();
   vector<Coordinates> getPos();
+  bool origPos();
 };
 
 #endif

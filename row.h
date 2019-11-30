@@ -11,6 +11,8 @@ class Row {
   bool checkFull();
   void changeRowNum(int row);
   void changeCell(int col, char changeTo);
+  void attachObserver(int col, Observer *ob);
+  void detachObserver(int col);
   char at(int col);
 };
 

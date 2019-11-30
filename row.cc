@@ -34,6 +34,14 @@ void Row::changeCell(int col, char changeTo){
   roww.at(col).changeCell(changeTo);
 }
 
+void Row::attachObserver(int col, Observer *ob){
+  roww.at(col).attach(ob);
+}
+
+void Row::detachObserver(int col){
+  roww.at(col).detach();
+}
+
 char Row::at(int col){
   return roww.at(col).getChar();
 }
