@@ -9,6 +9,10 @@ char Block1::getType(){
   return c;
 }
 
+vector<Coordinates> getPos(){
+  return coords;
+}
+
 void Block1::move(int shift){
   for (int i = 0; i < 4; ++i){
     State stat = {' ', coords, false};

@@ -20,6 +20,7 @@ public:
   virtual vector<Coordinates> turnPos(int shift)=0;
   vector<Coordinates> downPos(int shift);
   char getType();
+  vector<Coordinates> getPos();
 };
 
 #endif
