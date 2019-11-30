@@ -20,7 +20,7 @@
 
 using namespace std;
 
-NonRandom::NonRandom (string file) {
+NonRandom::NonRandom (string file, int n): Level(n) {
     fileName = file; // add a string here called sequence, load the file into string
     ifstream f {fileName};
     f >> sequence;

@@ -5,6 +5,8 @@
 #include "Level.h"
 #include "block1.h"
 
+Level::Level (int n): lvl(n) {}
+
 int Level::getLevel() {
     return lvl;
 }

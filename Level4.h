@@ -11,6 +11,7 @@ class Block1;
 
 class Level4: public Random {
 public:
+    Level4 ();
     Block1 *nextBlock () override;
 };
 

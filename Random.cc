@@ -3,3 +3,6 @@
 //
 
 #include "Random.h"
+#include "Level.h"
+
+Random::Random (int n): Level(n) {}

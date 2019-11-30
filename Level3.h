@@ -10,6 +10,7 @@ class Block1;
 
 class Level3: public Random {
 public:
+    Level3 ();
     Block1 *nextBlock () override;
 };
 

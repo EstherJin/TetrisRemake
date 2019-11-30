@@ -14,7 +14,7 @@ class NonRandom: public Level {
     std::string fileName;
     std::string sequence;
 public:
-    explicit NonRandom (std::string file);
+    NonRandom (std::string file, int n);
     Block1 *nextBlock() override;
 };
 

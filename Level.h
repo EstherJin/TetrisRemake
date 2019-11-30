@@ -11,6 +11,7 @@ class Level {
 protected:
     int lvl;
 public:
+    Level (int n);
     virtual Block1 *nextBlock() = 0;
     int getLevel();
 };

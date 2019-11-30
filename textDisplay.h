@@ -1,9 +1,17 @@
-#ifndef _TEXTDISPLAY_H_
-#define _TEXTDISPLAY_H_
-#include <iostream>
+//
+// Created by Ordencia Wu on 2019-11-28.
+//
 
-class TextDisplay: public TextDisplay {
-public: 
-	void print (ostream &out, std::string str1, std::string st2);
-}
-#endif
+#ifndef TETRIS_REMAKE_TEXTDISPLAY_H
+#define TETRIS_REMAKE_TEXTDISPLAY_H
+
+
+#include <ostream>
+
+class TextDisplay {
+public:
+    void print (std::ostream &out, std::string str1, std::string st2);
+};
+
+
+#endif //TETRIS_REMAKE_TEXTDISPLAY_H

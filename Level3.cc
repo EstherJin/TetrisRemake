@@ -14,6 +14,8 @@
 #include "s.h"
 #include "o.h"
 
+Level3::Level3 () : Random (3) {}
+
 Block1 *Level3::nextBlock() {
     Block1 *next;
 

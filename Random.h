@@ -12,6 +12,7 @@ class Block1;
 
 class Random: public Level {
 public:
+    Random (int n);
     virtual Block1 *nextBlock() = 0;
 };
 
