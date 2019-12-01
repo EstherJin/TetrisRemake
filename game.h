@@ -4,7 +4,7 @@
 #include <memory>
 #include <iostream>
 #include "board.h"
-#include "textdisplay.h"
+#include "textDisplay.h"
 
 class Game {
 	const int rows = 18;

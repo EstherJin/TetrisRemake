@@ -2,7 +2,7 @@
 #include <memory>
 #include <iostream>
 #include "board.h"
-#include "textdisplay.h"
+#include "textDisplay.h"
 #include "basicboard.h"
 #include "decorator.h"
 #include "force.h"
