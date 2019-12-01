@@ -4,7 +4,7 @@
 
 class Force:public Decorator {
 public:
-	Force(Board *b);
+	Force(Board *b, char changeBlockType);
 	int dropBlock () override;
 };
 
