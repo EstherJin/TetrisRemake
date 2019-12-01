@@ -34,9 +34,14 @@ string Board::print(bool blind) {
 	return sg->print(lvl->getLevel(), score, blind, type);
 }
 
-bool validMove(vector<Coordinates> newPos) {
+bool Board::validMove(vector<Coordinates> newPos) {
 	for (int i = 0; i < newPos.size(); ++i) {
-		char c = grid[Coordinates.row].at(Coordinates.col);
+		int roww = newPos.at(i).row;
+		int coll = newPOs.at(i).col;
+		if ((roww < 0) || (row > 14) || (coll < 0) || (coll > 10)){
+			return false;
+		}
+		char c = grid[roww].at(coll);
 		if (c != ' ') return false;
 	}
 	return true;

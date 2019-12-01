@@ -33,8 +33,7 @@ public:
 	void changeLevel(int direction, bool random, std::string filename);
 	int getScore();
 	void getNextBlock();
+	bool validMove(vector<Coordinates> newPos);
 };
-
-bool validMove(vector<Coordinates> newPos);
 
 #endif
