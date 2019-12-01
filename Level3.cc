@@ -14,12 +14,12 @@
 #include "s.h"
 #include "o.h"
 
-Level3::Level3 () : Random (3) {}
+Level3::Level3 (unsigned seed) : Random (3, seed) {}
 
 Block1 *Level3::nextBlock() {
     Block1 *next;
 
-    srand (time(NULL));
+    srand (seed);
 
     int number = rand() % 9 + 1;
 

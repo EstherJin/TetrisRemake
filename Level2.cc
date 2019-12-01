@@ -14,12 +14,12 @@
 #include "s.h"
 #include "o.h"
 
-Level2::Level2 () : Random (2) {}
+Level2::Level2 (unsigned seed) : Random (2,seed) {}
 
 Block1 *Level2::nextBlock() {
     Block1 *next;
 
-    srand (time(NULL));
+    srand (seed);
 
     int number = rand() % 7 + 1;
 

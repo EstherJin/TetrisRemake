@@ -11,8 +11,10 @@
 class Block1;
 
 class Random: public Level {
+protected:
+    unsigned seed;
 public:
-    Random (int n);
+    Random (int n, unsigned seed);
     virtual Block1 *nextBlock() = 0;
 };
 

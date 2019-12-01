@@ -5,4 +5,4 @@
 #include "Random.h"
 #include "Level.h"
 
-Random::Random (int n): Level(n) {}
+Random::Random (int n, unsigned seed): Level(n), seed{seed} {}
