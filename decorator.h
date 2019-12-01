@@ -1,10 +1,11 @@
 #ifndef DECORATOR_H
 #define DECORATOR_H
+#include <memory>
 #include "board.h"
 
 class Decorator:public Board {
 protected:
-	Board *board;
+	std::unique_ptr<Board> board;
 public:
 	Decorator(Board *b);
 	virtual ~Decorator();
@@ -18,7 +19,7 @@ public:
 	virtual void getNextBlock() override;
 	virtual bool validMove(vector<Coordinates> newPos) override;
 	virtual bool inSpecialEffect() override;
-	virtual void setSpecialEffect(bool se) override;
+	virtual void setSpecialEffect(bool se = true) override;
 
 	Board *removeDecorator();
 };

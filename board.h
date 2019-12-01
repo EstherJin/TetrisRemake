@@ -36,7 +36,7 @@ public:
 	virtual void getNextBlock();
 	virtual bool validMove(vector<Coordinates> newPos);
 	virtual bool inSpecialEffect();
-	virtual void setSpecialEffect(bool se);
+	virtual void setSpecialEffect(bool se = true);
 };
 
 #endif
