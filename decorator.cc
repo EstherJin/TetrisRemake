@@ -1,3 +1,4 @@
+#include <memory>
 #include "board.h"
 #include "decorator.h"
 using namespace std;
