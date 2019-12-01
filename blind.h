@@ -5,7 +5,7 @@
 class Blind:public Decorator {
 public:
 	Blind(Board *b);
-	void print(bool blind) override;
+	std::string print(bool blind) override;
 };
 
 #endif
