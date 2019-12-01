@@ -11,13 +11,13 @@
 #include "game.h"
 using namespace std;
 
-Game::Game(int startLevel, bool textOnly, string script1, string script2, unsigned seed): startLevel{startLevel}, textOnly{textOnly}, script1{script1}, script2{script2}, seed{seed}, brd1{new BasicBoard(startLevel, textOnly, script1, seed)}, brd2{new BasicBoard(startLevel, textOnly, script2, seed)} {
+Game::Game(int startLevel, bool textOnly, string script1, string script2, unsigned seed): defaultLevel{startLevel}, textOnly{textOnly}, script1{script1}, script2{script2}, seed{seed}, brd1{new BasicBoard(startLevel, textOnly, script1, seed)}, brd2{new BasicBoard(startLevel, textOnly, script2, seed)} {
 	brd1->getNextBlock();
 }
 
 void Game::restart() {
-	brd1 = make_unique<BasicBoard> {startLevel, textOnly, script1, seed};
-	brd2 = make_unique<BasicBoard> {startLevel, textOnly, script2, seed};
+	brd1 = make_unique<BasicBoard> {defaultLevel, textOnly, script1, seed};
+	brd2 = make_unique<BasicBoard> {defaultLevel, textOnly, script2, seed};
 }
 
 void Game::print(ostream &out) {
