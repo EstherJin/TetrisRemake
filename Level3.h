@@ -10,7 +10,7 @@ class Block1;
 
 class Level3: public Random {
 public:
-    Level3 ();
+    Level3 (unsigned seed);
     Block1 *nextBlock () override;
 };
 

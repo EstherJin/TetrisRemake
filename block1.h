@@ -1,11 +1,11 @@
 #ifndef BLOCK1_H
 #define BLOCK1_H
 #include <vector>
-#include "coords.h"
+#include "coordinates.h"
 #include "subject.h"
 using namespace std;
 
-class Block1{
+class Block1: public Subject{
 protected:
   vector<Coordinates> coords;
   int position;
