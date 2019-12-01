@@ -18,6 +18,7 @@ public:
 	virtual void getNextBlock() override;
 	virtual bool validMove(vector<Coordinates> newPos) override;
 	virtual bool inSpecialEffect() override;
+	virtual void setSpecialEffect(bool se) override;
 
 	Board *removeDecorator();
 };

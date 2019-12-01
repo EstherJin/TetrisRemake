@@ -148,3 +148,7 @@ void Board::getNextBlock() {
 bool Board::inSpecialEffect() {
 	return specialEffect;
 }
+
+void Board::setSpecialEffect(bool se) {
+	return specialEffect;
+}

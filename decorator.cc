@@ -6,33 +6,36 @@ Decorator::Decorator(Board *b): board {b} {}
 
 Decorator::~Decorator() {}
 
-std::string print(bool blind) override {
+std::string Decorator::print(bool blind) override {
 	board->print(blind);
 }
-void turnBlock(int amount) override {
+void Decorator::turnBlock(int amount) override {
 	board->turnBlock(amount);
 }
-void moveBlock(int amount) override {
+void Decorator::moveBlock(int amount) override {
 	board->moveBlock(amount);
 }
-void downBlock(int amount) override {
+void Decorator::downBlock(int amount) override {
 	board->downBlock(amount);
 }
-int dropBlock() override {
+int Decorator::dropBlock() override {
 	board->dropBlock();
 }
-void changeLevel(int direction, bool random, std::string filename) override {
+void Decorator::changeLevel(int direction, bool random, std::string filename) override {
 	board->changeLevel(direction, random, filename);
 }
-int getScore() override {
+int Decorator::getScore() override {
 	board->getScore();
 }
-void getNextBlock() override {
+void Decorator::getNextBlock() override {
 	board->getNextBlock();
 }
-bool validMove(vector<Coordinates> newPos) override {
+bool Decorator::validMove(vector<Coordinates> newPos) override {
 	board->validMove(newPos);
 }
-bool inSpecialEffect() override {
+bool Decorator::inSpecialEffect() override {
 	board->inSpecialEffect();
+}
+void Decorator::setSpecialEffect(bool se) override {
+	board->setSpecialEffect(se);
 }
