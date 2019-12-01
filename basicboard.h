@@ -3,6 +3,7 @@
 #include "board.h"
 
 class BasicBoard:public Board {
+public:
 	BasicBoard(int level = 0, bool textOnly = false, string script = "", unsigned seed = 0): Board{level, textOnly, script, seed} {}
 };
 
