@@ -6,7 +6,8 @@
 #include "cell.h"
 #include "block1.h"
 #include "block2.h"
-#include "level.h"
+#include "Level.h"
+#include "stringGenerator.h"
 #include "coordinates.h"
 #include "board.h"
 using namespace std;

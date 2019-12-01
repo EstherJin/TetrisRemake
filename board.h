@@ -6,8 +6,8 @@
 #include <vector>
 #include "cell.h"
 #include "block2.h"
-#include "level.h"
-#include "stringgenerator.h"
+#include "Level.h"
+#include "stringGenerator.h"
 #include "row.h"
 
 class Block1;
@@ -20,7 +20,7 @@ class Board {
 	std::unique_ptr<Level> lvl;
 	std::unique_ptr<Block1> nextBlock;
 protected:
-	const gridRows = 18;
+	const int gridRows = 18;
 	std::unique_ptr<Block1> currentBlock;
 	bool specialEffect = false;
 public:
