@@ -100,13 +100,13 @@ int Board::dropBlock() {
 
 	// check lines cleared
 	int linesCleared = 0;
-	for (int i = 0; i < gridRows; ++i) {
+	for (int i = gridRows - 1; i >= 0; --i) {
 		if (grid[i].checkFull()) {
 			++linesCleared;
 			grid.erase(grid.begin() + i);
-			Row newRow {gridRows - 1, &sg};
-			grid.emplace_back(newRow);
-			for (int j = i = 1; j < gridRows - 1; ++j) {
+			Row newRow {0, &sg};
+			grid.emplace_front(newRow);
+			for (int j = i; j >= 0; --j) {
 				grid[j].changeRowNum(j);
 			}
 		}
