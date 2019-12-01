@@ -22,18 +22,20 @@ class Board {
 protected:
 	const gridRows = 18;
 	std::unique_ptr<Block1> currentBlock;
+	bool specialEffect = false;
 public:
 	Board(int level = 0, bool textOnly = false, std::string script = "", unsigned seed = 0);
 	virtual ~Board() = 0;
 	virtual std::string print(bool blind = false);
-	void turnBlock(int amount);
+	virtual void turnBlock(int amount);
 	virtual void moveBlock(int amount);
-	void downBlock(int amount);
+	virtual void downBlock(int amount);
 	virtual int dropBlock(); // returns number of lines cleared
-	void changeLevel(int direction, bool random, std::string filename);
-	int getScore();
-	void getNextBlock();
-	bool validMove(vector<Coordinates> newPos);
+	virtual void changeLevel(int direction, bool random, std::string filename);
+	virtual int getScore();
+	virtual void getNextBlock();
+	virtual bool validMove(vector<Coordinates> newPos);
+	virtual bool inSpecialEffect();
 };
 
 #endif

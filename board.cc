@@ -2,6 +2,7 @@
 #include <memory>
 #include <iostream>
 #include <vector>
+#include <utility>
 #include "cell.h"
 #include "block1.h"
 #include "block2.h"
@@ -120,6 +121,10 @@ int Board::dropBlock() {
 		}
 	}
 
+	// switch blocks
+	currentBlock = nullptr;
+	std::swap(currentBlock, nextBlock);
+
 	return linesCleared;
 }
 
@@ -137,5 +142,9 @@ void Board::changeLevel(int direction, bool random, string filename) {
 int Board::getScore() { return score; }
 
 void Board::getNextBlock() {
-	nextBlock = make_unique<Block1> {lvl->nextBlock()};
+	if (!nextBlock) nextBlock = make_unique<Block1> {lvl->nextBlock()};
+}
+
+bool Board::inSpecialEffect() {
+	return specialEffect;
 }
