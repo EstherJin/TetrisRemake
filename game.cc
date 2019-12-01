@@ -57,10 +57,10 @@ void Game::processCommand(string command, int repeat, int board) {
 		if (tmp->inSpecialEffect()) {
 			if (board == 1) {
 				Decorator *temp = static_cast <Decorator *>(brd1.get());
-				brd1 = temp->removeDecorator();
+				brd1 = make_unique<Board> {temp->removeDecorator()};
 			} else if (board == 2) {
 				Decorator *temp = static_cast <Decorator *>(brd2.get());
-				brd2 = temp->removeDecorator();
+				brd2 = make_unique<Board> {temp->removeDecorator()};
 			}
 		}
 
