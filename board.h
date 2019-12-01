@@ -8,21 +8,22 @@
 #include "block2.h"
 #include "level.h"
 #include "stringgenerator.h"
+#include "row.h"
 
 class Block1;
-class Row;
 
 class Board {
-	const gridRows = 18;
 	StringGenerator sg;
 	std::vector<Row> grid;
 	std::vector<Block2> activeBlocks;
 	int score = 0;
 	std::unique_ptr<Level> lvl;
-	std::unique_ptr<Block1> currentBlock;
 	std::unique_ptr<Block1> nextBlock;
+protected:
+	const gridRows = 18;
+	std::unique_ptr<Block1> currentBlock;
 public:
-	Board(int level = 0);
+	Board(int level = 0, bool textOnly = false, std::string script = "", unsigned seed = 0);
 	virtual ~Board() = 0;
 	virtual std::string print(bool blind);
 	void turnBlock(int amount);
@@ -33,5 +34,7 @@ public:
 	int getScore();
 	void getNextBlock();
 };
+
+bool validMove(vector<Coordinates> newPos);
 
 #endif

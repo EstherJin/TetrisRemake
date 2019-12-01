@@ -6,7 +6,7 @@
 #include "game.h"
 using namespace std;
 
-Game::Game(int startLevel = 0, bool textOnly = false, std::string script1 = "sequence1.txt", std::string script2 = "sequence2.txt", unsigned seed = 0): brd1{new BasicBoard(startLevel, textOnly, script1, seed)}, brd2{new BasicBoard(startLevel, textOnly, script2, seed)} {
+Game::Game(int startLevel = 0, bool textOnly = false, string script1 = "sequence1.txt", string script2 = "sequence2.txt", unsigned seed = 0): brd1{new BasicBoard(startLevel, textOnly, script1, seed)}, brd2{new BasicBoard(startLevel, textOnly, script2, seed)} {
 	brd1->getNextBlock();
 }
 

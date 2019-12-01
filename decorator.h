@@ -8,6 +8,7 @@ protected:
 public:
 	Decorator(Board *b);
 	virtual ~Decorator();
+	Board *removeDecorator();
 };
 
 #endif

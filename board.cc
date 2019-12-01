@@ -10,19 +10,19 @@
 #include "board.h"
 using namespace std;
 
-Board::Board(int level) {
+Board(int level = 0, bool textOnly = false, string script = "", unsigned seed = 0) {
 	for (int r = 0; r < gridRows; ++r) {
 		Row row{r, &sg};
 		grid.emplace_back(row);
 	}
 
-	if (level == 1) lvl {new Level1 {level}};
-	else if (level == 2) lvl {new Level2 {level}};
-	else if (level == 3) lvl {new Level3 {level}};
-	else if (level == 4) lvl {new Level4 {level}};
-	else lvl {new NonRandom{level}};
+	if (level == 1) lvl = make_unique<Level1> {level};
+	else if (level == 2) lvl = make_unique<Level2> {level};
+	else if (level == 3) lvl = make_unique<Level3> {level};
+	else if (level == 4) lvl = make_unique<Level4> {level};
+	else lvl = make_unique<NonRandom> {script, level};
 
-	currentBlock{new Block1 {lvl->nextBlock()}};
+	currentBlock = make_unique<Block1> {lvl->nextBlock()};
 	nextBlock = nullptr;
 }
 
@@ -74,22 +74,63 @@ void Board::downBlock(int amount) {
 }
 
 int Board::dropBlock() {
-	// TO DO:
+	// keep dropping
+	for (int i = 0; i < gridRows; ++i) {
+		bool valid = validMove(currentBlock->downPos(1));
+		if (valid) {
+			currentBlock->down(1);
+		}
+		else break;
+	}
+
+	// change to block 2
+	Block2 b2;
+	activeBlocks.emplace_back(b2);
+	vector<Coordinates> blockCoords = currentBlock->getPos();
+	for (auto coord:blockCoords) {
+		grid[(*coord).row].changeCell((*coord).col, currentBlock->getType());
+		grid[(*coord).row].attachObserver((*coord).col, &activeBlocks.back());
+	}
+
+	// check lines cleared
+	int linesCleared = 0;
+	for (int i = 0; i < gridRows; ++i) {
+		if (grid[i].checkFull()) {
+			++linesCleared;
+			grid.erase(grid.begin() + i);
+			Row newRow {gridRows - 1, &sg};
+			grid.emplace_back(newRow);
+			for (int j = i = 1; j < gridRows - 1; ++j) {
+				grid[j].changeRowNum(j);
+			}
+		}
+	}
+
+	// calculate score
+	score += (lvl->getLevel() + linesCleared) * (lvl->getLevel() + linesCleared);
+	for (int i = 0; i < activeBlocks.size(); ++i) {
+		if (activeBlocks[i].checkDeleted()) {
+			score += (activeBlocks[i].getLevelDropped() + 1) * (activeBlocks[i].getLevelDropped() + 1);
+			activeBlocks.erase(activeBlocks.begin() + i);
+		}
+	}
+
+	return linesCleared;
 }
 
 void Board::changeLevel(int direction, bool random, string filename) {
 	if (random) {
-		if (level == 1) lvl {new Level1 {lvl->getLevel()}};
-		else if (level == 2) lvl {new Level2 {lvl->getLevel()}};
-		else if (level == 3) lvl {new Level3 {lvl->getLevel()}};
-		else if (level == 4) lvl {new Level4 {lvl->getLevel()}};
+		if (level == 1) lvl = make_unique<Level1> {lvl->getLevel()};
+		else if (level == 2) lvl = make_unique<Level2> {lvl->getLevel()};
+		else if (level == 3) lvl = make_unique<Level3> {lvl->getLevel()};
+		else if (level == 4) lvl = make_unique<Level4> {lvl->getLevel()};
 	} else {
-		lvl {new NonRandom{lvl->getLevel(), filename}};
+		lvl = make_unique<NonRandom> {lvl->getLevel(), filename};
 	}
 }
 
 int Board::getScore() { return score; }
 
 void Board::getNextBlock() {
-	nextBlock = new Block1 {lvl->nextBlock()};
+	nextBlock = make_unique<Block1> {lvl->nextBlock()};
 }
