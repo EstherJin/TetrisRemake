@@ -30,8 +30,8 @@ void Game::processCommand(string command, int repeat, int board) {
 	Board *tmp;
 	Board *tmp2;
 	if (board == 1) {
-		tmp = brd1;
-		tmp2 = brd2;
+		tmp = brd1.get();
+		tmp2 = brd2.get();
 	}
 	else if (board == 2) {
 		tmp = brd2;
@@ -56,10 +56,10 @@ void Game::processCommand(string command, int repeat, int board) {
 		// remove special effects from current board if there are any
 		if (tmp->inSpecialEffect()) {
 			if (board == 1) {
-				Decorator *temp = static_cast <Decorator *>(brd1);
+				Decorator *temp = static_cast <Decorator *>(brd1.get());
 				brd1 = temp->removeDecorator();
 			} else if (board == 2) {
-				Decorator *temp = static_cast <Decorator *>(brd2);
+				Decorator *temp = static_cast <Decorator *>(brd2.get());
 				brd2 = temp->removeDecorator();
 			}
 		}
