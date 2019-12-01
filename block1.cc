@@ -3,7 +3,13 @@ using namespace std;
 
 Block1::Block1(int position, char c): position{position}, c{c}{}
 
-Block1::~Block1(){}
+Block1::~Block1(){
+  for (int i = 0; i < coords.size(); ++i){
+    State stat = {' ', coords, false};
+    setState(stat);
+    notifyObservers();
+  }
+}
 
 char Block1::getType(){
   return c;
@@ -18,7 +24,7 @@ bool Block1::origPos(){
 }
 
 void Block1::move(int shift){
-  for (int i = 0; i < 4; ++i){
+  for (int i = 0; i < coords.size(); ++i){
     State stat = {' ', coords, false};
     setState(stat);
     notifyObservers();

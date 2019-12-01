@@ -13,7 +13,7 @@ class Game {
 	std::unique_ptr<Board> brd2 {new Board()};
 	std::unique_ptr<TextDisplay> td {new TextDisplay()};
 public:
-	Game(int startLevel = 0);
+	Game(int startLevel = 0, bool textOnly = false, std::string script1 = "sequence1.txt", std::string script2 = "sequence2.txt", unsigned seed = 0);
 	void restart();
 	void print(std::ostream &out);
 	void processCommand(std::string command, int repeat, int board);

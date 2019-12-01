@@ -5,7 +5,7 @@
 #include "subject.h"
 using namespace std;
 
-class Block1{
+class Block1: public Subject{
 protected:
   vector<Coordinates> coords;
   int position;
