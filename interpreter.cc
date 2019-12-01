@@ -49,6 +49,7 @@ void Interpreter::processCommands(string cmd, Game *g, int *turn){
       string file;
       cin >> file;
       g->processCommand(command, file, n, *turn);
+      g->print(cout);
     } else if (command == "sequence"){
       string file;
       cin >> file;
@@ -65,11 +66,14 @@ void Interpreter::processCommands(string cmd, Game *g, int *turn){
     } else if (command == "drop") {
       g->processCommand(command, n, *turn);
       *turn = (*turn % 2) + 1;
+      g->print(cout);
     } else if (command == "restart") {
       g->processCommand(command, n, *turn);
       *turn = 1;
-    }else {
+      g->print(cout);
+    } else {
       g->processCommand(command, n, *turn);
+      g->print(cout);
     }
   }
 }
