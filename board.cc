@@ -39,7 +39,7 @@ bool Board::validMove(vector<Coordinates> newPos) {
 	for (int i = 0; i < newPos.size(); ++i) {
 		int roww = newPos.at(i).row;
 		int coll = newPOs.at(i).col;
-		if ((roww < 0) || (row > 14) || (coll < 0) || (coll > 10)){
+		if ((roww < 0) || (row > 17) || (coll < 0) || (coll > 10)){
 			return false;
 		}
 		char c = grid[roww].at(coll);
