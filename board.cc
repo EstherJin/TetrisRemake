@@ -2,6 +2,7 @@
 #include <memory>
 #include <iostream>
 #include <vector>
+#include <utility>
 #include "cell.h"
 #include "block1.h"
 #include "block2.h"
@@ -99,13 +100,13 @@ int Board::dropBlock() {
 
 	// check lines cleared
 	int linesCleared = 0;
-	for (int i = 0; i < gridRows; ++i) {
+	for (int i = gridRows - 1; i >= 0; --i) {
 		if (grid[i].checkFull()) {
 			++linesCleared;
 			grid.erase(grid.begin() + i);
-			Row newRow {gridRows - 1, &sg};
-			grid.emplace_back(newRow);
-			for (int j = i = 1; j < gridRows - 1; ++j) {
+			Row newRow {0, &sg};
+			grid.emplace_front(newRow);
+			for (int j = i; j >= 0; --j) {
 				grid[j].changeRowNum(j);
 			}
 		}
@@ -119,6 +120,10 @@ int Board::dropBlock() {
 			activeBlocks.erase(activeBlocks.begin() + i);
 		}
 	}
+
+	// switch blocks
+	currentBlock = nullptr;
+	std::swap(currentBlock, nextBlock);
 
 	return linesCleared;
 }
@@ -137,5 +142,9 @@ void Board::changeLevel(int direction, bool random, string filename) {
 int Board::getScore() { return score; }
 
 void Board::getNextBlock() {
-	nextBlock = make_unique<Block1> {lvl->nextBlock()};
+	if (!nextBlock) nextBlock = make_unique<Block1> {lvl->nextBlock()};
+}
+
+bool Board::inSpecialEffect() {
+	return specialEffect;
 }
