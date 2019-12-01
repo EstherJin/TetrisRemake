@@ -2,6 +2,7 @@
 #include <memory>
 #include <iostream>
 #include "board.h"
+#include "textdisplay.h"
 #include "basicboard.h"
 #include "decorator.h"
 #include "force.h"
@@ -10,13 +11,13 @@
 #include "game.h"
 using namespace std;
 
-Game::Game(int startLevel = 0, bool textOnly = false, string script1 = "sequence1.txt", string script2 = "sequence2.txt", unsigned seed = 0): brd1{new BasicBoard(startLevel, textOnly, script1, seed)}, brd2{new BasicBoard(startLevel, textOnly, script2, seed)} {
+Game::Game(int startLevel, bool textOnly, string script1, string script2, unsigned seed): startLevel{startLevel}, textOnly{textOnly}, script1{script1}, script2{script2}, seed{seed}, brd1{new BasicBoard(startLevel, textOnly, script1, seed)}, brd2{new BasicBoard(startLevel, textOnly, script2, seed)} {
 	brd1->getNextBlock();
 }
 
 void Game::restart() {
-	brd1 = new BasicBoard();
-	brd2 = new BasicBoard();
+	brd1 = make_unique<BasicBoard> {startLevel, textOnly, script1, seed};
+	brd2 = make_unique<BasicBoard> {startLevel, textOnly, script2, seed};
 }
 
 void Game::print(ostream &out) {

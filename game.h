@@ -4,11 +4,15 @@
 #include <memory>
 #include <iostream>
 #include "board.h"
+#include "textdisplay.h"
 
-class TextDisplay;
 class Game {
 	const int rows = 18;
 	int highscore = 0;
+	int defaultLevel;
+	bool textOnly;
+	std::string script1, script2;
+	unsigned seed;
 	std::unique_ptr<Board> brd1 {new Board()};
 	std::unique_ptr<Board> brd2 {new Board()};
 	TextDisplay td;
