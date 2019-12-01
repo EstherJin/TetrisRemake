@@ -5,7 +5,7 @@
 struct State {
   char type;
   Coordinates coords;
-  Boolean add;
+  bool add;
 };
 
 #endif
