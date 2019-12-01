@@ -10,7 +10,7 @@ class Subject {
   std::vector<Observer*> observers;
   State state;
  protected:
-  void setState(newS);
+  void setState(State newS);
  public:
   void attach(Observer *o);
   void notifyObservers();

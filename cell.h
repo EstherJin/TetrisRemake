@@ -5,7 +5,7 @@
 
 class Cell: public Subject {
   char type;
-  Coordinates coords,
+  Coordinates coords;
  public:
   Cell(char type, int row, int col);
   void clearCell();
