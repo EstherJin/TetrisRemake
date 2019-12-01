@@ -1,68 +1,60 @@
 #include <iostream>
 #include <string>
-#include <vector>
-#include <map>
 #include "game.h"
+#include "interpreter.h"
 using namespace std;
 
 
 int main(int argc, char *argv[]) {
   cin.exceptions(ios::eofbit|ios::failbit);
-  string cmd;
-  Game g;
-  int turn = 1;
+  bool textOnly = false;
+  int startlvl = 0;
+  string script1 = "sequence1.txt"
+  string script2 = "sequence2.txt"
+  unsigned int seed = 1;
 
-  map<string, vector<string>> commands;
-  commands["down"] = {"do","dow","down"};
-  commands["left"] = {"lef","left"};
-  commands["right"] = {"ri","rig","righ","right"};
-  commands["clockwise"] = {"cl","clo","cloc","clock","clockw","clockwi","clockwis","clockwise"};
-  commands["counterclockwise"] = {"co","cou","coun","count","counte","counter","counterc","countercl","counterclo","countercloc","counterclock","counterclockw","counterclockwi","counterclockwis","counterclockwise"};
-  commands["drop"] = {"dr","dro","drop"};
-  commands["levelup"] = {"levelu","levelup"};
-  commands["leveldown"] = {"leveld","leveldo","leveldow","leveldown"};
-  commands["norandom"] = {"n","no","nor","nora","noran","norand","norando","norandom"};
-  commands["random"] = {"ra","ran","rand","rando","random"};
-  commands["sequence"] = {"s","se","seq","sequ","seque","sequen","sequenc","sequence"};
-  commands["restart"] = {"re","res","rest","resta","restar","restart"};
+  for (int i = 1; i < argc; ++i) {
+    if (argv[i] == "-text"){
+      textOnly = true;
+    } else if (argv[i] == "-startlevel"){
+      ++i;
+      if (i < argc){
+        startlvl = stoi(argv[i]);
+        if (!((startlvl >= 0) && (startlvl <= 4))) {
+          startlvl = 0;
+        }
+      }
+    } else if (argv[i] == "-scriptfile1"){
+      ++i;
+      if (i < argc){
+        script1 = argv[i];
+      }
+    } else if (argv[i] == "-scriptfile2"){
+      ++i;
+      if (i < argc){
+        script2 = argv[i];
+      }
+    } else if (argv[i] == "-seed"){
+      ++i;
+      if (i < argc){
+        int seedd = stoi(argv[i]);
+        if (seedd >= 0) {
+          seed = seedd;
+        }
+      }
+    }
+  }
+
+  string cmd;
+  Interpreter interpret;
+  Game g{startlvl, textOnly, script1, script2, seed};
+  int turn = 1;
 
   try {
   while (true) {
     cin >> cmd;
-    int n = 1;
-    if ((cmd[0] >= '0') && (cmd[0] <= '9')) {
-      int i = 1;
-      int n = cmd[0] - '0';
-      while ((cmd[i] >= '0') && (cmd[i] <= '9')){
-        n = n * 10 + (cmd[i] - '0');
-        ++i;
-      }
-      cmd = cmd.substr(i);
-    }
-    try{
-      map<string, vector<string>>::iterator it;
-      for(it = commands.begin(); it != commands.end(); it++) {
-        string key = it->first;
-        vector<string> command = it->second;
-        int size = command.size();
-        for(int i = 0; i < size; ++i){
-          if (cmd == command.at(i)){
-            throw key;
-          }
-        }
-      }
-    }
-    catch(string comm){
-      if ((comm == "sequence") || (comm == "norandom")){
-        cin >> cmd;
-        g.processCommand(comm, cmd, n, turn);
-      } else if (comm == "drop") {
-        g.processCommand(comm, n, turn);
-        turn = (turn % 2) + 1;
-      } else {
-        g.processCommand(comm, n, turn);
-      }
-    }
+    string comm;
+    interpret.processCommands(cmd, &g, &turn);
   }
   }
   catch (ios::failure &) {}
