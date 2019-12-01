@@ -25,7 +25,7 @@ protected:
 public:
 	Board(int level = 0, bool textOnly = false, std::string script = "", unsigned seed = 0);
 	virtual ~Board() = 0;
-	virtual std::string print(bool blind);
+	virtual std::string print(bool blind = false);
 	void turnBlock(int amount);
 	virtual void moveBlock(int amount);
 	void downBlock(int amount);
