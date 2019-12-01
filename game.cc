@@ -34,8 +34,8 @@ void Game::processCommand(string command, int repeat, int board) {
 		tmp2 = brd2.get();
 	}
 	else if (board == 2) {
-		tmp = brd2;
-		tmp2 = brd1;
+		tmp = brd2.get();
+		tmp2 = brd1.get();
 	}
 
 	if (command == "left")
