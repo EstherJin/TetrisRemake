@@ -1,7 +1,7 @@
 #ifndef BLOCK1_H
 #define BLOCK1_H
 #include <vector>
-#include "coords.h"
+#include "coordinates.h"
 #include "subject.h"
 using namespace std;
 
