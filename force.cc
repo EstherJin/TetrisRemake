@@ -5,10 +5,10 @@
 using namespace std;
 
 Force::Force(Board *b, char changeBlockType): Decorator{b} {
-	board->currentBlock = make_unique<Block1> {0, changeBlockType};
+	board->currentBlock = make_unique<Block1> (0, changeBlockType);
 }
 
-int Force::dropBlock () override {
+int Force::dropBlock () {
 	if (board->currentBlock->origPos()) {
 		int lines = board->dropBlock();
 		return lines;
