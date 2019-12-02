@@ -126,6 +126,11 @@ int Board::dropBlock() {
 	currentBlock = nullptr;
 	std::swap(currentBlock, nextBlock);
 
+	// check game over
+	if (!validMove(currentBlock->getPos)) {
+		throw "game over";
+	}
+
 	return linesCleared;
 }
 
@@ -157,3 +162,5 @@ bool Board::inSpecialEffect() {
 void Board::setSpecialEffect(bool se) {
 	return specialEffect;
 }
+
+int Board::getLevel() { return lvl->getLevel(); }

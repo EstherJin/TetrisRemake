@@ -40,8 +40,9 @@ bool Decorator::inSpecialEffect() override {
 void Decorator::setSpecialEffect(bool se) override {
 	board->setSpecialEffect(se);
 }
-Board *void Decorator::removeDecorator() {
+Board *Decorator::removeDecorator() {
 	Board *tmp = board;
 	board = nullptr;
 	return tmp;
 }
+int Decorator:: getLevel() { board->getLevel(); }

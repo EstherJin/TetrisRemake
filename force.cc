@@ -13,6 +13,6 @@ int Force::dropBlock () override {
 		int lines = board->dropBlock();
 		return lines;
 	} else {
-		// TO DO: game over? Throw exception?
+		throw "game over";
 	}
 }

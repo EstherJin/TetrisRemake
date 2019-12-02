@@ -11,7 +11,15 @@
 #include "game.h"
 using namespace std;
 
-Game::Game(int startLevel, bool textOnly, string script1, string script2, unsigned seed): defaultLevel{startLevel}, textOnly{textOnly}, script1{script1}, script2{script2}, seed{seed}, brd1{new BasicBoard(startLevel, startLevel, textOnly, script1, seed)}, brd2{new BasicBoard(startLevel, startLevel, textOnly, script2, seed)} {
+Game::Game(int startLevel, bool textOnly, string script1, string script2, unsigned seed): defaultLevel{startLevel}, textOnly{textOnly}, script1{script1}, script2{script2}, seed{seed} {
+	brd1 = make_unique <BasicBoard> {startLevel, startLevel, textOnly, script1, seed}; 
+	brd2 = make_unique <BasicBoard> {startLevel, startLevel, textOnly, script2, seed};
+	if (defaultLevel >= 3) {
+		Board *tmp = brd1.get();
+		Board *tmp2 = brd2.get();
+		brd1 = make_unique<Heavy> {tmp};
+		brd2 = make_unique<Heavy> {tmp2};
+	}
 	brd1->getNextBlock();
 }
 
@@ -49,7 +57,19 @@ void Game::processCommand(string command, int repeat, int board) {
 	else if (command == "counterclockwise")
 		tmp->turnBlock(repeat * -1);
 	else if (command == "drop") {
-		int linesCleared = tmp->dropBlock();
+		try {
+			int linesCleared = tmp->dropBlock();
+		}
+		catch (char *gameOver) {
+			// calculate scores
+			if (brd1->getScore() > brd2->getScore()) {
+				cout << "Winner is Player 1!!! :)" << endl;
+			} else if (brd2->getScore() > brd1->getScore()) {
+				cout << "Winner is Player 2!!! :)" << endl;
+			} else {
+				cout << "Tie! Good game everyone :)" << endl;
+			}
+		}
 		int score = tmp->getScore();
 		if (score > highscore) highscore = score;
 
@@ -105,10 +125,20 @@ void Game::processCommand(string command, int repeat, int board) {
 		if (board == 1) brd2->getNextBlock();
 		else brd1->getNextBlock();
 	}
-	else if (command == "levelup")
+	else if (command == "levelup") {
 		tmp->changeLevel(repeat, false, "");
-	else if (command == "leveldown")
+		if (tmp->getLevel() >= 3) {
+			if (board == 1) brd1 = make_unique<Heavy> {tmp};
+			else if (board == 2) brd2 = make_unique<Heavy> {tmp};
+		}
+	}
+	else if (command == "leveldown") {
 		tmp->changeLevel(repeat * -1, false, "");
+		if (tmp->getLevel() >= 3) {
+			if (board == 1) brd1 = make_unique<Heavy> {tmp};
+			else if (board == 2) brd2 = make_unique<Heavy> {tmp};
+		}
+	}
 	else if (command == "random")
 		tmp->changeLevel(0, true, "");
 	else if (command == "restart")

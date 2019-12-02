@@ -20,6 +20,7 @@ public:
 	virtual bool validMove(vector<Coordinates> newPos) override;
 	virtual bool inSpecialEffect() override;
 	virtual void setSpecialEffect(bool se = true) override;
+	virtual int getLevel() override;
 
 	Board *removeDecorator();
 };
