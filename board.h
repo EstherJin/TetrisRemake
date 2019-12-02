@@ -21,7 +21,7 @@ class Board {
 	std::unique_ptr<Block1> nextBlock;
 	bool random;
 	int player;
-	const maxLevel = 4;
+	const int maxLevel = 4;
 protected:
 	const int gridRows = 18;
 	std::unique_ptr<Block1> currentBlock;
