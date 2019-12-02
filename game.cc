@@ -11,13 +11,13 @@
 #include "game.h"
 using namespace std;
 
-Game::Game(int startLevel, bool textOnly, string script1, string script2, unsigned seed): defaultLevel{startLevel}, textOnly{textOnly}, script1{script1}, script2{script2}, seed{seed}, brd1{new BasicBoard(startLevel, textOnly, script1, seed)}, brd2{new BasicBoard(startLevel, textOnly, script2, seed)} {
+Game::Game(int startLevel, bool textOnly, string script1, string script2, unsigned seed): defaultLevel{startLevel}, textOnly{textOnly}, script1{script1}, script2{script2}, seed{seed}, brd1{new BasicBoard(startLevel, startLevel, textOnly, script1, seed)}, brd2{new BasicBoard(startLevel, startLevel, textOnly, script2, seed)} {
 	brd1->getNextBlock();
 }
 
 void Game::restart() {
-	brd1 = make_unique<BasicBoard> {defaultLevel, textOnly, script1, seed};
-	brd2 = make_unique<BasicBoard> {defaultLevel, textOnly, script2, seed};
+	brd1 = make_unique<BasicBoard> {defaultLevel, defaultLevel, textOnly, script1, seed};
+	brd2 = make_unique<BasicBoard> {defaultLevel, defaultLevel, textOnly, script2, seed};
 }
 
 void Game::print(ostream &out) {
@@ -65,7 +65,7 @@ void Game::processCommand(string command, int repeat, int board) {
 		}
 
 		// activate special effects if lines cleared
-		if (linesCleared > 0) {
+		if (linesCleared > 1) {
 			cout << "Choose your special action" << endl;
 			while (true) {
 				string action;
@@ -106,9 +106,9 @@ void Game::processCommand(string command, int repeat, int board) {
 		else brd1->getNextBlock();
 	}
 	else if (command == "levelup")
-		tmp->changeLevel(repeat);
+		tmp->changeLevel(repeat, false, "");
 	else if (command == "leveldown")
-		tmp->changeLevel(repeat * -1);
+		tmp->changeLevel(repeat * -1, false, "");
 	else if (command == "random")
 		tmp->changeLevel(0, true, "");
 	else if (command == "restart")
@@ -119,9 +119,9 @@ void Game::processCommand(string command, int repeat, int board) {
 void Game::processCommand(string command, string filename, int repeat, int board) {
 	Board *tmp;
 	if (board == 1) 
-		tmp = brd1;
+		tmp = brd1.get();
 	else if (board == 2)
-		tmp = brd2;
+		tmp = brd2.get();
 
 	if (command == "norandom")
 		tmp->changeLevel(0, false, filename);

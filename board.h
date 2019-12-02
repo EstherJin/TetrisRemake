@@ -19,19 +19,21 @@ class Board {
 	int score = 0;
 	std::unique_ptr<Level> lvl;
 	std::unique_ptr<Block1> nextBlock;
+	bool random;
+	const maxLevel = 4;
 protected:
 	const int gridRows = 18;
 	std::unique_ptr<Block1> currentBlock;
 	bool specialEffect = false;
 public:
-	Board(int level = 0, bool textOnly = false, std::string script = "", unsigned seed = 0);
+	Board(bool random, int level = 0, bool textOnly = false, std::string script = "", unsigned seed = 0);
 	virtual ~Board() = 0;
 	virtual std::string print(bool blind = false);
 	virtual void turnBlock(int amount);
 	virtual void moveBlock(int amount);
 	virtual void downBlock(int amount);
 	virtual int dropBlock(); // returns number of lines cleared
-	virtual void changeLevel(int direction, bool random, std::string filename);
+	virtual void changeLevel(int direction, bool rand, std::string filename);
 	virtual int getScore();
 	virtual void getNextBlock();
 	virtual bool validMove(vector<Coordinates> newPos);
