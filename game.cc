@@ -12,8 +12,8 @@
 using namespace std;
 
 Game::Game(int startLevel, bool textOnly, string script1, string script2, unsigned seed): defaultLevel{startLevel}, textOnly{textOnly}, script1{script1}, script2{script2}, seed{seed} {
-	brd1 = make_unique <BasicBoard> {startLevel, startLevel, textOnly, script1, seed}; 
-	brd2 = make_unique <BasicBoard> {startLevel, startLevel, textOnly, script2, seed};
+	brd1 = make_unique <BasicBoard> {1, startLevel, startLevel, textOnly, script1, seed}; 
+	brd2 = make_unique <BasicBoard> {2, startLevel, startLevel, textOnly, script2, seed};
 	if (defaultLevel >= 3) {
 		Board *tmp = brd1.get();
 		Board *tmp2 = brd2.get();
@@ -24,8 +24,8 @@ Game::Game(int startLevel, bool textOnly, string script1, string script2, unsign
 }
 
 void Game::restart() {
-	brd1 = make_unique<BasicBoard> {defaultLevel, defaultLevel, textOnly, script1, seed};
-	brd2 = make_unique<BasicBoard> {defaultLevel, defaultLevel, textOnly, script2, seed};
+	brd1 = make_unique<BasicBoard> {1, defaultLevel, defaultLevel, textOnly, script1, seed};
+	brd2 = make_unique<BasicBoard> {2, defaultLevel, defaultLevel, textOnly, script2, seed};
 }
 
 void Game::print(ostream &out) {

@@ -20,13 +20,14 @@ class Board {
 	std::unique_ptr<Level> lvl;
 	std::unique_ptr<Block1> nextBlock;
 	bool random;
+	int player;
 	const maxLevel = 4;
 protected:
 	const int gridRows = 18;
 	std::unique_ptr<Block1> currentBlock;
 	bool specialEffect = false;
 public:
-	Board(bool random, int level = 0, bool textOnly = false, std::string script = "", unsigned seed = 0);
+	Board(int player, bool random, int level = 0, bool textOnly = false, std::string script = "", unsigned seed = 0);
 	virtual ~Board() = 0;
 	virtual std::string print(bool blind = false);
 	virtual void turnBlock(int amount);

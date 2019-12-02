@@ -12,7 +12,7 @@
 #include "board.h"
 using namespace std;
 
-Board(bool random, int level = 0, bool textOnly = false, string script = "", unsigned seed = 0): random{random} {
+Board(int player, bool random, int level = 0, bool textOnly = false, string script = "", unsigned seed = 0): player{player}, random{random} {
 	for (int r = 0; r < gridRows; ++r) {
 		Row row{r, &sg};
 		grid.emplace_back(row);
