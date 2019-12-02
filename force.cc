@@ -4,7 +4,7 @@
 #include "force.h"
 using namespace std;
 
-Force::Force(Board *b, char changeBlockType): Decorator{b} {
+Force::Force(Board *b, char changeBlockType): Board{}, Decorator{b} {
 	board->currentBlock = make_unique<Block1> (0, changeBlockType);
 }
 

@@ -3,7 +3,7 @@
 #include "heavy.h"
 using namespace std;
 
-Heavy::Heavy(Board *b): Decorator{b} {}
+Heavy::Heavy(Board *b): Board{}, Decorator{b} {}
 
 void Heavy::moveBlock(int amount) {
 	for (int i = 0; i < abs(amount); ++i) {

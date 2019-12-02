@@ -4,7 +4,7 @@
 #include "block1.h"
 using namespace std;
 
-Blind::Blind(Board *b): Decorator{b} {}
+Blind::Blind(Board *b): Board{}, Decorator{b} {}
 
 string Board::print(bool blind) {
 	char type = ' ';
