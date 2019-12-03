@@ -114,7 +114,7 @@ int BasicBoard::dropBlock() {
 	vector<Coordinates> blockCoords = currentBlock->getPos();
   for (auto coord:blockCoords) {
 		grid[coord.row].changeCell(coord.col, currentBlock->getType());
-		grid[coord.row].attachObserver(coord.col, &activeBlocks.back());
+		grid[coord.row].attachObserver(coord.col, &b2);
 	}
 
 	// check lines cleared
@@ -128,11 +128,12 @@ int BasicBoard::dropBlock() {
 			for (int j = i; j >= 0; --j) {
 				grid[j].changeRowNum(j);
 			}
+			++i;
 		}
 	}
 
 	// calculate score
-	score += (lvl->getLevel() + linesCleared) * (lvl->getLevel() + linesCleared);
+	if (linesCleared > 0)  score += (lvl->getLevel() + linesCleared) * (lvl->getLevel() + linesCleared);
 	for (int i = 0; i < activeBlocks.size(); ++i) {
 		if (activeBlocks[i].checkDeleted()) {
 			score += (activeBlocks[i].getLevelDropped() + 1) * (activeBlocks[i].getLevelDropped() + 1);
@@ -143,13 +144,14 @@ int BasicBoard::dropBlock() {
 	// switch blocks
 	currentBlock = nullptr;
 	std::swap(currentBlock, nextBlock);
-	currentBlock->attach(&sg);
-	currentBlock->notifCurrPos();
 
 	// check game over
 	if (!validMove(currentBlock->getPos())) {
 		throw "game over";
 	}
+
+	currentBlock->attach(&sg);
+	currentBlock->notifCurrPos();
 
 	return linesCleared;
 }

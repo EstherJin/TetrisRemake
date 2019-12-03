@@ -7,7 +7,6 @@
 
 #include "window.h"
 #include "observer.h"
-#include "info.h"
 #include "state.h"
 
 class GraphicsDisplay: public Observer {
@@ -30,4 +29,3 @@ public:
 };
 
 #endif
-
