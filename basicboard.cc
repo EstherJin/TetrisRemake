@@ -17,16 +17,16 @@
 #include "basicboard.h"
 using namespace std;
 
-BasicBoard::BasicBoard(int player, bool random, int level, bool textOnly, string script, unsigned seed): player{player}, random{random} {
+BasicBoard::BasicBoard(int player, bool random, int level, bool textOnly, string script, unsigned seed): player{player}, random{random}, textOnly{textOnly}, seed{seed} {
 	for (int r = 0; r < gridRows; ++r) {
 		Row row{r, &sg};
 		grid.emplace_back(row);
 	}
 
-	if (level == 1) lvl = make_unique<Level1> (level);
-	else if (level == 2) lvl = make_unique<Level2> (level);
-	else if (level == 3) lvl = make_unique<Level3> (level);
-	else if (level == 4) lvl = make_unique<Level4> (level);
+	if (level == 1) lvl = make_unique<Level1> (seed);
+	else if (level == 2) lvl = make_unique<Level2> (seed);
+	else if (level == 3) lvl = make_unique<Level3> (seed);
+	else if (level == 4) lvl = make_unique<Level4> (seed);
 	else lvl = make_unique<NonRandom> (script, level);
 
 	currentBlock = make_unique<Block1> (lvl->nextBlock());
@@ -142,16 +142,19 @@ int BasicBoard::dropBlock() {
 void BasicBoard::changeLevel(int direction, bool rand, string filename) {
 	int level = lvl->getLevel();
 	if (direction == 0 && rand) {
-		if (level == 1) lvl = make_unique<Level1> (lvl->getLevel());
-		else if (level == 2) lvl = make_unique<Level2> (lvl->getLevel());
-		else if (level == 3) lvl = make_unique<Level3> (lvl->getLevel());
-		else if (level == 4) lvl = make_unique<Level4> (lvl->getLevel());
+		if (level == 1) lvl = make_unique<Level1> (seed);
+		else if (level == 2) lvl = make_unique<Level2> (seed);
+		else if (level == 3) lvl = make_unique<Level3> (seed);
+		else if (level == 4) lvl = make_unique<Level4> (seed);
 	} else if (direction == 0 && !rand) {
 		lvl = make_unique<NonRandom> (lvl->getLevel(), filename);
 	} else if (direction != 0) {
 		int newLevel = lvl->getLevel() + direction;
 		if (newLevel < 0 || newLevel > maxLevel) return;
-		lvl->changeLevel(newLevel);
+		if (newLevel == 1) lvl = make_unique<Level1> (seed);
+		else if (newLevel == 2) lvl = make_unique<Level2> (seed);
+		else if (newLevel == 3) lvl = make_unique<Level3> (seed);
+		else if (newLevel == 4) lvl = make_unique<Level4> (seed);
 	}
 }
 
