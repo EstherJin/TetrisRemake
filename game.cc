@@ -169,7 +169,8 @@ void Game::processCommand(string command, int repeat, int board) {
 		tmp->turnBlock(repeat * -1);
 	else if (command == "drop") {
 		try {
-			tmp->dropBlock();
+			int linesCleared = tmp->dropBlock();
+			processDropCmd(linesCleared, board);
 		}
 		catch (int linesCleared) {
 			processDropCmd(linesCleared, board);
