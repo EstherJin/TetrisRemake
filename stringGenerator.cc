@@ -60,7 +60,7 @@ string StringGenerator::print(int level, int score, bool blind, char next) { // 
 	}
 	str += "\n";
 
-	str += "Next:\n";
+	str += "Next:      \n";
 
 	if (next != ' ') {
 		switch (next) {

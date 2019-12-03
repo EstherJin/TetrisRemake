@@ -60,7 +60,7 @@ Xwindow::Xwindow(int width, int height, int player) {
         colours[i] = xcolour.pixel;
     }
 
-    XSetForeground(d, gc, colours[Black]);
+    XSetForeground(d, gc, colours[gray20]);
 
     // Make window non-resizeable.
     XSizeHints hints;
@@ -129,7 +129,7 @@ void Xwindow::drawString(int x, int y, string msg) {
                 str += "TTT        \n T         \n";
                 break;
         }
-    }*/
-}
+    }
+}*/
 
 

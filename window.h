@@ -13,11 +13,11 @@ class Xwindow {
     Window w;
     int s;
     GC gc;
-    unsigned long colours[10];
+    unsigned long colours[11];
     int player;
 
 public:
-    Xwindow(int width=405, int height=817, int player=1);  // Constructor; displays the window.
+    Xwindow(int width=405, int height=780, int player=1);  // Constructor; displays the window.
     ~Xwindow();                              // Destructor; destroys the window.
     Xwindow(const Xwindow&) = delete;
     Xwindow &operator=(const Xwindow&) = delete;
@@ -34,4 +34,5 @@ public:
 };
 
 #endif
+
 

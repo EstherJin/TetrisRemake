@@ -8,11 +8,14 @@
 #include "window.h"
 #include "observer.h"
 #include "state.h"
+#include <memory>
 
 class GraphicsDisplay: public Observer {
     const int cellLength = 34;
     const int row = 18;
     const int col = 11;
+    const int xmar = 15;
+    const int ymar = 65;
 
     std::unique_ptr<Xwindow> window;
     //~GraphicsDisplay();

@@ -59,10 +59,10 @@ char NonRandom::nextBlock() { //use istringstream to load one char at a time and
                     // 3,0 3,1 4,0 4,1
                     next = new O ();
                     break;
-            }*/
+            }
 
-            // 
-		}
+
+		}*/
 
             sequence = sequence.substr(2);
             break;
