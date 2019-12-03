@@ -213,11 +213,13 @@ bool BasicBoard::validStartPos() {
 }
 
 void BasicBoard::changeCurrentBlock(char type) {
-	if (type == 'I') nextBlock = make_unique<I>();
-	else if (type == 'J') nextBlock = make_unique<J>();
-	else if (type == 'L') nextBlock = make_unique<L>();
-	else if (type == 'O') nextBlock = make_unique<O>();
-	else if (type == 'S') nextBlock = make_unique<S>();
-	else if (type == 'Z') nextBlock = make_unique<Z>();
-	else nextBlock = make_unique<T>();
+	if (type == 'I') currentBlock = make_unique<I>();
+	else if (type == 'J') currentBlock = make_unique<J>();
+	else if (type == 'L') currentBlock = make_unique<L>();
+	else if (type == 'O') currentBlock = make_unique<O>();
+	else if (type == 'S') currentBlock = make_unique<S>();
+	else if (type == 'Z') currentBlock = make_unique<Z>();
+	else currentBlock = make_unique<T>();
+	currentBlock->attach(&sg);
+	currentBlock->notifCurrPos();
 }
