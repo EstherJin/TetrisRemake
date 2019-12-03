@@ -27,7 +27,7 @@ void I::turn(int shift){
       stat = {' ', coords.at(2), false};
       setState(stat);
       notifyObservers();
-      coords.at(2).row -= 1;
+      coords.at(2).row -= 2;
       coords.at(2).col -= 2;
       stat = {c, coords.at(2), true};
       setState(stat);
@@ -35,7 +35,7 @@ void I::turn(int shift){
       stat = {' ', coords.at(3), false};
       setState(stat);
       notifyObservers();
-      coords.at(3).row -= 1;
+      coords.at(3).row -= 3;
       coords.at(3).col -= 3;
       stat = {c, coords.at(3), true};
       setState(stat);
@@ -53,7 +53,7 @@ void I::turn(int shift){
       stat = {' ', coords.at(2), false};
       setState(stat);
       notifyObservers();
-      coords.at(2).row += 1;
+      coords.at(2).row += 2;
       coords.at(2).col += 2;
       stat = {c, coords.at(2), true};
       setState(stat);
@@ -61,7 +61,7 @@ void I::turn(int shift){
       stat = {' ', coords.at(3), false};
       setState(stat);
       notifyObservers();
-      coords.at(3).row += 1;
+      coords.at(3).row += 3;
       coords.at(3).col += 3;
       stat = {c, coords.at(3), true};
       setState(stat);
@@ -82,16 +82,16 @@ vector<Coordinates> I::turnPos(int shift){
     if (position == 0){
       cds.at(1).row -= 1;
       cds.at(1).col -= 1;
-      cds.at(2).row -= 1;
+      cds.at(2).row -= 2;
       cds.at(2).col -= 2;
-      cds.at(3).row -= 1;
+      cds.at(3).row -= 3;
       cds.at(3).col -= 3;
     } else {
       cds.at(1).row += 1;
       cds.at(1).col += 1;
-      cds.at(2).row += 1;
+      cds.at(2).row += 2;
       cds.at(2).col += 2;
-      cds.at(3).row += 1;
+      cds.at(3).row += 3;
       cds.at(3).col += 3;
     }
   }
