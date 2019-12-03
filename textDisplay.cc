@@ -15,7 +15,7 @@ void TextDisplay::print (ostream &out, string str1, string str2) {
     string board1;
     string board2;
 
-    while ((ss1>>board1) && (ss2>>board2)) {
+    while (getline(ss1, board1) && getline(ss2, board2)) {
         out << board1;
         out << "          ";
         out << board2;
