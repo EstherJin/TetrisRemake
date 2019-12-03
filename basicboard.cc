@@ -171,7 +171,7 @@ int BasicBoard::getScore() { return score; }
 
 void BasicBoard::getNextBlock() {
 	if (!nextBlock) {
-		char type = (lvl->nextBlock())->getType();
+		char type = lvl->nextBlock();
 		if (type == 'I') nextBlock = make_unique<I>();
 		else if (type == 'J') nextBlock = make_unique<J>();
 		else if (type == 'L') nextBlock = make_unique<L>();
