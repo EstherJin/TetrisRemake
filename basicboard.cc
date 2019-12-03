@@ -147,6 +147,7 @@ int BasicBoard::dropBlock() {
 
 	// check game over
 	if (!validMove(currentBlock->getPos())) {
+		currentBlock = nullptr;
 		throw "game over";
 	}
 
