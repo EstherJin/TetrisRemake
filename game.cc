@@ -84,6 +84,7 @@ void Game::processDropCmd(int linesCleared, int board) {
 					brd1 = make_shared<Blind> (brd1);
 					brd1->setSpecialEffect();
 				}
+				break;
 			}
 			else if (action == "heavy") {
 				if (board == 1) {
@@ -93,6 +94,7 @@ void Game::processDropCmd(int linesCleared, int board) {
 					brd1 = make_shared<Heavy> (brd1);
 					brd1->setSpecialEffect();
 				}
+				break;
 			}
 			else if (action == "force") {
 				char type;
@@ -104,6 +106,7 @@ void Game::processDropCmd(int linesCleared, int board) {
 					brd1 = make_shared<Force> (brd1, type);
 					brd1->setSpecialEffect();
 				}
+				break;
 			}
 			else cout << "Invalid input, try again" << endl;
 		}
@@ -166,7 +169,8 @@ void Game::processCommand(string command, int repeat, int board) {
 		tmp->turnBlock(repeat * -1);
 	else if (command == "drop") {
 		try {
-			tmp->dropBlock();
+			int linesCleared = tmp->dropBlock();
+			processDropCmd(linesCleared, board);
 		}
 		catch (int linesCleared) {
 			processDropCmd(linesCleared, board);
