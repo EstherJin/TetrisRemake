@@ -8,8 +8,8 @@ private:
   int cellCount;
   int levelDropped;
 public:
-  Block2();
-  virtual ~Block2(int cellCount, int levelDropped);
+  Block2(int cellCount, int levelDropped);
+  virtual ~Block2();
   bool checkDeleted();
   int getLevelDropped();
   void notify(Subject &whoFrom) override;
