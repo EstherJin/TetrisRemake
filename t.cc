@@ -9,7 +9,11 @@ T::T(): Block1{0, 'T'} {
 }
 
 void T::turn(int shift){
-  shift = shift % 4;
+  if (shift > 0){
+    shift = shift % 4;
+  } else{
+    shift = ((-4 * shift) - (shift * -1)) % 4;
+  }
   while (shift > 0){
     if (position == 0){
       State stat = {' ', coords.at(2), false};
@@ -83,7 +87,11 @@ void T::turn(int shift){
 
 vector<Coordinates> T::turnPos(int shift){
   vector<Coordinates> cds = coords;
-  shift = shift % 4;
+  if (shift > 0){
+    shift = shift % 4;
+  } else{
+    shift = ((-4 * shift) - (shift * -1)) % 4;
+  }
   while (shift > 0){
     if (position == 0){
       coords.at(2).row -= 1;

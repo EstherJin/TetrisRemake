@@ -10,6 +10,11 @@ S::S(): Block1{0, 'S'} {
 }
 
 void S::turn(int shift){
+  if (shift > 0){
+    shift = shift % 4;
+  } else{
+    shift = ((-4 * shift) - (shift * -1)) % 4;
+  }
   if ((shift % 2) != 0){
     if (position == 0){
       State stat = {' ', coords.at(1), false};
@@ -48,6 +53,11 @@ void S::turn(int shift){
 }
 
 vector<Coordinates> S::turnPos(int shift){
+  if (shift > 0){
+    shift = shift % 4;
+  } else{
+    shift = ((-4 * shift) - (shift * -1)) % 4;
+  }
   vector<Coordinates> cds = coords;
   if ((shift % 2) != 0){
     if (position == 0){

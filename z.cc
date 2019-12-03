@@ -9,35 +9,40 @@ Z::Z(): Block1{0, 'Z'} {
 }
 
 void Z::turn(int shift){
+  if (shift > 0){
+    shift = shift % 4;
+  } else{
+    shift = ((-4 * shift) - (shift * -1)) % 4;
+  }
   if ((shift % 2) != 0){
     if (position == 0){
-      State stat = {' ', coords.at(0), false};
+      State stat = {' ', coords.at(2), false};
       setState(stat);
       notifyObservers();
-      coords.at(0).col += 2;
-      stat = {c, coords.at(0), true};
+      coords.at(2).row -= 2;
+      stat = {c, coords.at(2), true};
       setState(stat);
       notifyObservers();
       stat = {' ', coords.at(3), false};
       setState(stat);
       notifyObservers();
-      coords.at(3).row += 2;
+      coords.at(3).col -= 2;
       stat = {c, coords.at(3), true};
       setState(stat);
       notifyObservers();
       position = 1;
     } else {
-      State stat = {' ', coords.at(0), false};
+      State stat = {' ', coords.at(2), false};
       setState(stat);
       notifyObservers();
-      coords.at(0).col -= 2;
-      stat = {c, coords.at(0), true};
+      coords.at(2).row += 2;
+      stat = {c, coords.at(2), true};
       setState(stat);
       notifyObservers();
       stat = {' ', coords.at(3), false};
       setState(stat);
       notifyObservers();
-      coords.at(3).row -= 2;
+      coords.at(3).col += 2;
       stat = {c, coords.at(3), true};
       setState(stat);
       notifyObservers();
@@ -47,14 +52,19 @@ void Z::turn(int shift){
 }
 
 vector<Coordinates> Z::turnPos(int shift){
+  if (shift > 0){
+    shift = shift % 4;
+  } else{
+    shift = ((-4 * shift) - (shift * -1)) % 4;
+  }
   vector<Coordinates> cds = coords;
   if ((shift % 2) != 0){
     if (position == 0){
-      cds.at(0).col += 2;
-      cds.at(3).row += 2;
+      cds.at(2).row -= 2;
+      cds.at(3).col -= 2;
     } else {
-      cds.at(0).col -= 2;
-      cds.at(3).row -= 2;
+      cds.at(2).row += 2;
+      cds.at(3).col += 2;
     }
   }
   return cds;

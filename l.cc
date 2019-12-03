@@ -9,7 +9,11 @@ L::L(): Block1{0, 'L'} {
 }
 
 void L::turn(int shift){
-  shift = shift % 4;
+  if (shift > 0){
+    shift = shift % 4;
+  } else{
+    shift = ((-4 * shift) - (shift * -1)) % 4;
+  }
   while (shift > 0){
     if (position == 0){
       State stat = {' ', coords.at(0), false};
@@ -24,7 +28,7 @@ void L::turn(int shift){
       notifyObservers();
       coords.at(3).row -= 2;
       coords.at(3).col -= 2;
-      stat = {' ', coords.at(3), false};
+      stat = {c, coords.at(3), true};
       setState(stat);
       notifyObservers();
     } else if (position == 1) {
@@ -41,7 +45,7 @@ void L::turn(int shift){
       notifyObservers();
       coords.at(3).row += 1;
       coords.at(3).col += 1;
-      stat = {' ', coords.at(3), false};
+      stat = {c, coords.at(3), true};
       setState(stat);
       notifyObservers();
     } else if (position == 2) {
@@ -106,29 +110,33 @@ void L::turn(int shift){
 
 vector<Coordinates> L::turnPos(int shift){
   vector<Coordinates> cds = coords;
-  shift = shift % 4;
+  if (shift > 0){
+    shift = shift % 4;
+  } else{
+    shift = ((-4 * shift) - (shift * -1)) % 4;
+  }
   while (shift > 0){
     if (position == 0){
-      coords.at(0).col -= 2;
-      coords.at(3).row -= 2;
-      coords.at(3).col -= 2;
+      cds.at(0).col -= 2;
+      cds.at(3).row -= 2;
+      cds.at(3).col -= 2;
     } else if (position == 1) {
-      coords.at(2).row -= 1;
-      coords.at(2).col += 1;
-      coords.at(3).row += 1;
-      coords.at(3).col += 1;
+      cds.at(2).row -= 1;
+      cds.at(2).col += 1;
+      cds.at(3).row += 1;
+      cds.at(3).col += 1;
     } else if (position == 2) {
-      coords.at(0).row -= 1;
-      coords.at(1).col += 1;
-      coords.at(2).row -= 1;
-      coords.at(2).col -= 1;
+      cds.at(0).row -= 1;
+      cds.at(1).col += 1;
+      cds.at(2).row -= 1;
+      cds.at(2).col -= 1;
     } else {
-      coords.at(0).row += 1;
-      coords.at(0).col += 2;
-      coords.at(1).col -= 1;
-      coords.at(2).row += 2;
-      coords.at(3).row += 1;
-      coords.at(3).col += 1;
+      cds.at(0).row += 1;
+      cds.at(0).col += 2;
+      cds.at(1).col -= 1;
+      cds.at(2).row += 2;
+      cds.at(3).row += 1;
+      cds.at(3).col += 1;
     }
     --shift;
   }

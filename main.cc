@@ -49,6 +49,7 @@ int main(int argc, char *argv[]) {
   string cmd;
   Interpreter interpret;
   Game g{startlvl, textOnly, script1, script2, seed};
+  g.print(cout);
   int turn = 1;
 
   try {

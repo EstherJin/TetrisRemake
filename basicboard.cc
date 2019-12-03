@@ -54,7 +54,6 @@ string BasicBoard::print(bool blind) {
 
 bool BasicBoard::validMove(vector<Coordinates> newPos) {
 	for (int i = 0; i < newPos.size(); ++i) {
-cout << "in loop" <<endl;
 		int roww = newPos.at(i).row;
 		int coll = newPos.at(i).col;
 		if ((roww < 0) || (roww > 17) || (coll < 0) || (coll > 10)){
@@ -73,7 +72,6 @@ int abs(int num) {
 
 void BasicBoard::turnBlock(int amount) {
 	for (int i = 0; i < abs(amount); ++i) {
-	cout << "hi" <<endl;
 		bool valid = validMove(currentBlock->turnPos(amount/abs(amount)));
 	cout << valid <<endl;
 		if (valid) currentBlock->turn(amount/abs(amount));
