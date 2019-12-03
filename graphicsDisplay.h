@@ -8,6 +8,7 @@
 #include "window.h"
 #include "observer.h"
 #include "state.h"
+#include <memory>
 
 class GraphicsDisplay: public Observer {
     const int cellLength = 34;
