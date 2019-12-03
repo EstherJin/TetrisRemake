@@ -59,4 +59,6 @@ int main(int argc, char *argv[]) {
   }
   }
   catch (ios::failure &) {}
+  catch (int i){}
+  cout << "Thanks for playing!"<< endl;
 }
