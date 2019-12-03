@@ -26,7 +26,7 @@ void Interpreter::processCommands(string cmd, Game *g, int *turn){
   int n = 1;
   if ((cmd[0] >= '0') && (cmd[0] <= '9')) {
     int i = 1;
-    int n = cmd[0] - '0';
+    n = cmd[0] - '0';
     while ((cmd[i] >= '0') && (cmd[i] <= '9')){
       n = n * 10 + (cmd[i] - '0');
       ++i;
