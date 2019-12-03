@@ -158,7 +158,7 @@ void BasicBoard::changeLevel(int direction, bool rand, string filename) {
 int BasicBoard::getScore() { return score; }
 
 void BasicBoard::getNextBlock() {
-	if (!nextBlock) nextBlock = make_unique<Block1> {lvl->nextBlock()};
+	if (!nextBlock) nextBlock = make_unique<Block1> (lvl->nextBlock());
 }
 
 bool BasicBoard::inSpecialEffect() {
@@ -166,7 +166,7 @@ bool BasicBoard::inSpecialEffect() {
 }
 
 void BasicBoard::setSpecialEffect(bool se) {
-	return specialEffect;
+	specialEffect = se;
 }
 
 int BasicBoard::getLevel() { return lvl->getLevel(); }

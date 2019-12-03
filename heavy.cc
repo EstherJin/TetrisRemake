@@ -3,7 +3,7 @@
 #include "heavy.h"
 using namespace std;
 
-Heavy::Heavy(shared_ptr<Board> b): Board{}, Decorator{b} {}
+Heavy::Heavy(shared_ptr<Board> board): Decorator{board} {}
 
 void Heavy::moveBlock(int amount) {
 	board->moveBlock();
@@ -16,9 +16,6 @@ void Heavy::downBlock(int amount) {
 		if (valid) {
 			board->downBlock(1);
 		}
-		else {
-			int linesCleared = board->dropBlock();
-			throw linesCleared;
-		}
+		else board->dropBlock();
 	}
 }

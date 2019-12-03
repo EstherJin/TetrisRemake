@@ -4,7 +4,7 @@
 #include "block1.h"
 using namespace std;
 
-Blind::Blind(shared_ptr<Board> b): Board{}, Decorator{b} {}
+Blind::Blind(shared_ptr<Board> board): Decorator{board} {}
 
 string Board::print(bool blind) {
 	board->print(true);

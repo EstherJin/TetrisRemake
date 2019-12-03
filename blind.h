@@ -4,7 +4,7 @@
 
 class Blind:public Decorator {
 public:
-	Blind(std::shared_ptr<Board> b);
+	Blind(std::shared_ptr<Board> board);
 	std::string print(bool blind) override;
 };
 
