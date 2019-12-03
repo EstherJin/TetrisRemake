@@ -64,13 +64,14 @@ char NonRandom::nextBlock() { //use istringstream to load one char at a time and
                     break;
             }*/
 
-            // }
+            // 
+		}
 
-            sequence = sequence.substr(1);
+            sequence = sequence.substr(2);
             break;
         } else {
             ifstream f{fileName};
-            f >> sequence;
+			getline(f, sequence);
             ss.str(sequence);
         }
     }

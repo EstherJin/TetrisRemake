@@ -143,13 +143,14 @@ int BasicBoard::dropBlock() {
 	// switch blocks
 	currentBlock = nullptr;
 	std::swap(currentBlock, nextBlock);
-	currentBlock->attach(&sg);
-	currentBlock->notifCurrPos();
 
 	// check game over
 	if (!validMove(currentBlock->getPos())) {
 		throw "game over";
 	}
+
+	currentBlock->attach(&sg);
+	currentBlock->notifCurrPos();
 
 	return linesCleared;
 }
