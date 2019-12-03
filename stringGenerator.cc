@@ -46,6 +46,8 @@ string StringGenerator::print(int level, int score, bool blind, char next) { // 
 			if (blind) {
 				if ((i >= 3 && i <= 12) || (j >= 3 && j <= 9)) {
 					str += "?";
+				} else {
+				    str += grid.at(i).at(j);
 				}
 			}
 			else {
