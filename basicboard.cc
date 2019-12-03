@@ -13,6 +13,7 @@
 #include "Level4.h"
 #include "NonRandom.h"
 #include "stringGenerator.h"
+#include "graphicsDisplay.h"
 #include "coordinates.h"
 #include "basicboard.h"
 using namespace std;
