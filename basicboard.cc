@@ -19,7 +19,7 @@ using namespace std;
 
 BasicBoard::BasicBoard(int player, bool random, int level, bool textOnly, string script, unsigned seed): player{player}, random{random}, textOnly{textOnly}, seed{seed} {
 	for (int r = 0; r < gridRows; ++r) {
-		Row row{r, &sg};
+		Row row{r, &sg, &gd};
 		grid.emplace_back(row);
 	}
 

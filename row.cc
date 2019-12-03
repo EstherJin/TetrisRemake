@@ -1,10 +1,11 @@
 #include "row.h"
 using namespace std;
 
-Row::Row(int rowNum,  Observer *ob): rowNum{rowNum}{
+Row::Row(int rowNum,  Observer *ob, Observer *ob2): rowNum{rowNum}{
   for(int i = 0; i < 11; ++i){
     Cell c = {' ', rowNum, i};
     c.attach(ob);
+	c.attach(ob2);
     roww.emplace_back(c);
   }
 }
