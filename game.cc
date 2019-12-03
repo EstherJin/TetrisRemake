@@ -14,7 +14,7 @@ using namespace std;
 Game::Game(int startLevel, bool textOnly, string script1, string script2, unsigned seed): defaultLevel{startLevel}, textOnly{textOnly}, script1{script1}, script2{script2}, seed{seed} {
 	brd1 = make_shared <BasicBoard> (1, startLevel, startLevel, textOnly, script1, seed);
 	brd2 = make_shared <BasicBoard> (2, startLevel, startLevel, textOnly, script2, seed);
-	if (defaultLevel >= 3) {
+	if (startLevel >= 3) {
 		brd1 = make_shared<Heavy> (brd1);
 		brd2 = make_shared<Heavy> (brd2);
 	}
