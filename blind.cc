@@ -6,6 +6,6 @@ using namespace std;
 
 Blind::Blind(shared_ptr<Board> board): Decorator{board} {}
 
-string Board::print(bool blind) {
+string Blind::print(bool blind) {
 	board->print(true);
 }

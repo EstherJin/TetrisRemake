@@ -1,8 +1,10 @@
+#include "subject.h"
 #include "stringGenerator.h"
 #include "state.h"
+#include <vector>
 using namespace std;
 
-stringGenerator::stringGenerator() {
+StringGenerator::StringGenerator() {
 	vector<vector<char>> newGrid;
 
 	for (int i = 0; i < gridRows; ++i) {
@@ -16,16 +18,16 @@ stringGenerator::stringGenerator() {
 	grid = newGrid;
 }
 
-void stringGenerator::notify(Subject &whoNotified) { // update the display for one cell
+void StringGenerator::notify(Subject &whoNotified) { // update the display for one cell
 	State st = whoNotified.getState();
 	if (st.add) {
-		grid[st.coord.x][st.coord.y] = st.type;
+		grid[st.coords.row][st.coords.col] = st.type;
 	} else {
-		grid[st.coord.x][st.coord.y] = ' ';
+		grid[st.coords.row][st.coords.col] = ' ';
 	}
 }
 
-string TextDisplay::print(int level, int score, bool blind, char next) { // generate a string that represents one board
+string StringGenerator::print(int level, int score, bool blind, char next) { // generate a string that represents one board
 	string str = "";
 
 	str += "Level:    " + level + "\n";
@@ -36,7 +38,7 @@ string TextDisplay::print(int level, int score, bool blind, char next) { // gene
 	}
 	str += "\n";
 
-	// does row and col start from 0? 
+	// does row and col start from 0?
 	for (int i = 0; i < gridRows; ++i) {
 		for (int j = 0; j < gridCols; ++j) {
 			if (blind) {
@@ -59,7 +61,7 @@ string TextDisplay::print(int level, int score, bool blind, char next) { // gene
 
 	if (next != null) {
 		switch (next) {
-			case 'I': 
+			case 'I':
 				str += "           \nIIII       \n";
 				break;
 			case 'J':

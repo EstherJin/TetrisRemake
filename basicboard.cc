@@ -97,7 +97,7 @@ int BasicBoard::dropBlock() {
 	}
 
 	// change to block 2
-	Block2 b2;
+	Block2 b2(4,lvl->getLevel());
 	activeBlocks.emplace_back(b2);
 	vector<Coordinates> blockCoords = currentBlock->getPos();
   for (auto coord:blockCoords) {
