@@ -5,7 +5,6 @@
 #include "graphicsDisplay.h"
 #include "observer.h"
 #include "cell.h"
-#include "info.h"
 #include "state.h"
 #include "window.h"
 #include <memory>
