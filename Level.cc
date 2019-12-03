@@ -10,3 +10,7 @@ Level::Level (int n): lvl(n) {}
 int Level::getLevel() {
     return lvl;
 }
+
+void Level::changeLevel(int n) {
+    lvl = n;
+}

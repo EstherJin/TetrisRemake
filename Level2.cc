@@ -16,26 +16,28 @@
 
 Level2::Level2 (unsigned seed) : Random (2,seed) {}
 
-Block1 *Level2::nextBlock() {
-    Block1 *next;
+char Level2::nextBlock() {
+    char next;
 
     srand (seed);
 
     int number = rand() % 7 + 1;
 
     if (number == 1) {
-        next = new S ();
+        next = 'S';
     } else if (number == 2) {
-        next = new Z ();
+        next = 'Z';
     } else if (number == 3) {
-        next = new I ();
+        next = 'I';
     } else if (number == 4) {
-        next = new T ();
+        next = 'T';
     } else if (number == 5) {
-        next = new J ();
+        next = 'J';
     } else if (number == 6) {
-        next = new L ();
+        next = 'L';
     } else if (number == 7) {
-        next = new O ();
+        next = 'O';
     }
+
+    return next;
 }

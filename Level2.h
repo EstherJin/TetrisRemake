@@ -11,7 +11,7 @@ class Block1;
 class Level2: public Random {
 public:
     Level2 (unsigned seed);
-    Block1 *nextBlock() override;
+    char nextBlock() override;
 };
 
 

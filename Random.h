@@ -15,7 +15,7 @@ protected:
     unsigned seed;
 public:
     Random (int n, unsigned seed);
-    virtual Block1 *nextBlock() = 0;
+    virtual char nextBlock() = 0;
 };
 
 

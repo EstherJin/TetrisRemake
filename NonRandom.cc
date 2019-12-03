@@ -26,16 +26,15 @@ NonRandom::NonRandom (string file, int n): Level(n) {
     f >> sequence;
 }
 
-Block1 *NonRandom::nextBlock() { //use istringstream to load one char at a time and substr, reload when empty
+char NonRandom::nextBlock() { //use istringstream to load one char at a time and substr, reload when empty
     istringstream ss {sequence};
     char block;
 
     vector<Coordinates> coords;
-    Block1 *next;
 
     while (true) {
         if (ss >> block) {
-            switch (block) {
+            /*switch (block) {
                 case 'L':
                     next = new L ();
                     break;
@@ -63,8 +62,9 @@ Block1 *NonRandom::nextBlock() { //use istringstream to load one char at a time 
                     // 3,0 3,1 4,0 4,1
                     next = new O ();
                     break;
-            }
-            sequence = sequence.substr(2);
+            }*/
+
+            sequence = sequence.substr(1);
             break;
         } else {
             ifstream f{fileName};
@@ -73,5 +73,5 @@ Block1 *NonRandom::nextBlock() { //use istringstream to load one char at a time 
         }
     }
 
-    return next;
+    return block;
 }
