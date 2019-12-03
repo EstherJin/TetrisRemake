@@ -132,7 +132,7 @@ int BasicBoard::dropBlock() {
 	std::swap(currentBlock, nextBlock);
 
 	// check game over
-	if (!validMove(currentBlock->getPos)) {
+	if (!validMove(currentBlock->getPos())) {
 		throw "game over";
 	}
 
@@ -140,13 +140,14 @@ int BasicBoard::dropBlock() {
 }
 
 void BasicBoard::changeLevel(int direction, bool rand, string filename) {
+	int level = lvl->getLevel();
 	if (direction == 0 && rand) {
 		if (level == 1) lvl = make_unique<Level1> (lvl->getLevel());
 		else if (level == 2) lvl = make_unique<Level2> (lvl->getLevel());
 		else if (level == 3) lvl = make_unique<Level3> (lvl->getLevel());
 		else if (level == 4) lvl = make_unique<Level4> (lvl->getLevel());
 	} else if (direction == 0 && !rand) {
-		lvl = make_unique<NonRandom> {lvl->getLevel(), filename};
+		lvl = make_unique<NonRandom> (lvl->getLevel(), filename);
 	} else if (direction != 0) {
 		int newLevel = lvl->getLevel() + direction;
 		if (newLevel < 0 || newLevel > maxLevel) return;

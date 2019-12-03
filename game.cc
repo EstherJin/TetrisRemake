@@ -32,6 +32,63 @@ void Game::print(ostream &out) {
 	td.print(out, td1, td2);
 }
 
+void Game::processDropCmd(int linesCleared) {
+	int score = tmp->getScore();
+	if (score > highscore) highscore = score;
+
+	// remove special effects from current board if there are any
+	if (tmp->inSpecialEffect()) {
+		if (board == 1) {
+			Decorator *temp = static_cast <Decorator *>(brd1.get());
+			brd1 = temp->removeDecorator();
+		} else if (board == 2) {
+			Decorator *temp = static_cast <Decorator *>(brd2.get());
+			brd2 = temp->removeDecorator();
+		}
+	}
+
+	// activate special effects if lines cleared
+	if (linesCleared > 1) {
+		cout << "Choose your special action" << endl;
+		while (true) {
+			string action;
+			cin >> action;
+			if (action == "blind") {
+				if (board == 1) {
+					brd2 = make_shared<Blind> (brd2);
+					brd2->setSpecialEffect();
+				} else if (board == 2) {
+					brd1 = make_shared<Blind> (brd1);
+					brd1->setSpecialEffect();
+				}
+			}
+			else if (action == "heavy") {
+				if (board == 1) {
+					brd2 = make_shared<Heavy> (brd2);
+					brd2->setSpecialEffect();
+				} else if (board == 2) {
+					brd1 = make_shared<Heavy> (brd1);
+					brd1->setSpecialEffect();
+				}
+			}
+			else if (action == "force") {
+				char type;
+				cin >> type;
+				if (board == 1) {
+					brd2 = make_shared<Force> (brd2, type);
+					brd2->setSpecialEffect();
+				} else if (board == 2) {
+					brd1 = make_shared<Force> (brd1, type);
+					brd1->setSpecialEffect();
+				}
+			}
+			else cout << "Invalid input, try again" << endl;
+		}
+	}
+	if (board == 1) brd2->getNextBlock();
+	else brd1->getNextBlock();
+}
+
 void Game::processCommand(string command, int repeat, int board) {
 	Board *tmp;
 	Board *tmp2;
@@ -43,20 +100,9 @@ void Game::processCommand(string command, int repeat, int board) {
 		tmp = brd2.get();
 		tmp2 = brd1.get();
 	}
-  int linesCleared = 0;
-	if (command == "left")
-		tmp->moveBlock(repeat * -1);
-	else if (command == "right")
-		tmp->moveBlock(repeat);
-	else if (command == "down")
-		tmp->downBlock(repeat);
-	else if (command == "clockwise")
-		tmp->turnBlock(repeat);
-	else if (command == "counterclockwise")
-		tmp->turnBlock(repeat * -1);
-	else if (command == "drop") {
+	if (command == "left") {
 		try {
-			linesCleared = tmp->dropBlock();
+			tmp->moveBlock(repeat * -1);
 		}
 		catch (char *gameOver) {
 			// calculate scores
@@ -68,60 +114,20 @@ void Game::processCommand(string command, int repeat, int board) {
 				cout << "Tie! Good game everyone :)" << endl;
 			}
 		}
-		int score = tmp->getScore();
-		if (score > highscore) highscore = score;
+		catch (int linesCleared) {
 
-		// remove special effects from current board if there are any
-		if (tmp->inSpecialEffect()) {
-			if (board == 1) {
-				Decorator *temp = static_cast <Decorator *>(brd1.get());
-				brd1 = temp->removeDecorator();
-			} else if (board == 2) {
-				Decorator *temp = static_cast <Decorator *>(brd2.get());
-				brd2 = temp->removeDecorator();
-			}
 		}
-
-		// activate special effects if lines cleared
-		if (linesCleared > 1) {
-			cout << "Choose your special action" << endl;
-			while (true) {
-				string action;
-				cin >> action;
-				if (action == "blind") {
-					if (board == 1) {
-						brd2 = make_shared<Blind> (brd2);
-						brd2->setSpecialEffect();
-					} else if (board == 2) {
-						brd1 = make_shared<Blind> (brd1);
-						brd1->setSpecialEffect();
-					}
-				}
-				else if (action == "heavy") {
-					if (board == 1) {
-						brd2 = make_shared<Heavy> (brd2);
-						brd2->setSpecialEffect();
-					} else if (board == 2) {
-						brd1 = make_shared<Heavy> (brd1);
-						brd1->setSpecialEffect();
-					}
-				}
-				else if (action == "force") {
-					char type;
-					cin >> type;
-					if (board == 1) {
-						brd2 = make_shared<Force> (brd2, type);
-						brd2->setSpecialEffect();
-					} else if (board == 2) {
-						brd1 = make_shared<Force> (brd1, type);
-						brd1->setSpecialEffect();
-					}
-				}
-				else cout << "Invalid input, try again" << endl;
-			}
-		}
-		if (board == 1) brd2->getNextBlock();
-		else brd1->getNextBlock();
+	}
+	else if (command == "right")
+		tmp->moveBlock(repeat);
+	else if (command == "down")
+		tmp->downBlock(repeat);
+	else if (command == "clockwise")
+		tmp->turnBlock(repeat);
+	else if (command == "counterclockwise")
+		tmp->turnBlock(repeat * -1);
+	else if (command == "drop") {
+		
 	}
 	else if (command == "levelup") {
 		tmp->changeLevel(repeat, false, "");

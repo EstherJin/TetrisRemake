@@ -16,6 +16,7 @@ class Game {
 	std::shared_ptr<Board> brd1;
 	std::shared_ptr<Board> brd2;
 	TextDisplay td;
+	void processDropCmd(int linesCleared);
 public:
 	Game(int startLevel = 0, bool textOnly = false, std::string script1 = "sequence1.txt", std::string script2 = "sequence2.txt", unsigned seed = 0);
 	void restart();
