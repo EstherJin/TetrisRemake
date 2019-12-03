@@ -64,7 +64,7 @@ char NonRandom::nextBlock() { //use istringstream to load one char at a time and
                     break;
             }*/
 
-            }
+            //}
 
             sequence = sequence.substr(1);
             break;
