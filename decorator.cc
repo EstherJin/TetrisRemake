@@ -41,6 +41,7 @@ void Decorator::setSpecialEffect(bool se) {
 	board->setSpecialEffect(se);
 }
 shared_ptr<Board> Decorator::removeDecorator() {
+	board->setSpecialEffect(false);
 	return board;
 }
 int Decorator::getLevel() { board->getLevel(); }
