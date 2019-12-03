@@ -31,6 +31,8 @@ public:
 	bool inSpecialEffect() override;
 	void setSpecialEffect(bool se = true) override;
 	int getLevel() override;
+	bool originalPos() override;
+	bool validDownPos() override;
 };
 
 #endif

@@ -111,7 +111,7 @@ int BasicBoard::dropBlock() {
 			++linesCleared;
 			grid.erase(grid.begin() + i);
 			Row newRow {0, &sg};
-			grid.emplace_front(newRow);
+			grid.insert(grid.begin(), newRow);
 			for (int j = i; j >= 0; --j) {
 				grid[j].changeRowNum(j);
 			}
@@ -169,3 +169,10 @@ void BasicBoard::setSpecialEffect(bool se) {
 }
 
 int BasicBoard::getLevel() { return lvl->getLevel(); }
+
+bool BasicBoard::originalPos() { return currentBlock->origPos(); }
+
+bool BasicBoard::validDownPos() {
+	if (!validMove(currentBlock->downPos(1))) return false;
+	return true;
+}

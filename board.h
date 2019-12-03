@@ -28,6 +28,8 @@ public:
 	virtual bool inSpecialEffect()=0;
 	virtual void setSpecialEffect(bool se = true)=0;
 	virtual int getLevel()=0;
+	virtual bool originalPos() = 0;
+	virtual bool validDownPos() = 0;
 };
 
 #endif
