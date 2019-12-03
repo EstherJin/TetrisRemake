@@ -17,4 +17,3 @@ void Subject::notifyObservers() {
 void Subject::setState(State newS) { state = newS; }
 
 State Subject::getState() const { return state; }
-#endif

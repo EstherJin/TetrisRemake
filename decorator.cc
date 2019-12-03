@@ -54,3 +54,7 @@ bool Decorator::validDownPos() {
 bool Decorator::validStartPos() {
 	return board->validStartPos();
 }
+
+void Decorator::changeCurrentBlock(char type) {
+	board->changeCurrentBlock(type);
+}

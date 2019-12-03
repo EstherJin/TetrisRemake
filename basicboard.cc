@@ -5,6 +5,13 @@
 #include <utility>
 #include "cell.h"
 #include "block1.h"
+#include "i.h"
+#include "j.h"
+#include "s.h"
+#include "z.h"
+#include "t.h"
+#include "o.h"
+#include "l.h"
 #include "block2.h"
 #include "Level.h"
 #include "Level1.h"
@@ -13,7 +20,7 @@
 #include "Level4.h"
 #include "NonRandom.h"
 #include "stringGenerator.h"
-#include "graphicsDisplay.h"
+// #include "graphicsDisplay.h"
 #include "coordinates.h"
 #include "basicboard.h"
 using namespace std;
@@ -30,8 +37,8 @@ BasicBoard::BasicBoard(int player, bool random, int level, bool textOnly, string
 	else if (level == 4) lvl = make_unique<Level4> (seed);
 	else lvl = make_unique<NonRandom> (script, level);
 
-	currentBlock = make_unique<Block1> (lvl->nextBlock());
-	nextBlock = nullptr;
+	currentBlock = nullptr;
+	std::swap(currentBlock, nextBlock);
 }
 
 BasicBoard::~BasicBoard() {}
@@ -111,7 +118,7 @@ int BasicBoard::dropBlock() {
 		if (grid[i].checkFull()) {
 			++linesCleared;
 			grid.erase(grid.begin() + i);
-			Row newRow {0, &sg};
+			Row newRow {0, &sg, &gd};
 			grid.insert(grid.begin(), newRow);
 			for (int j = i; j >= 0; --j) {
 				grid[j].changeRowNum(j);
@@ -148,7 +155,7 @@ void BasicBoard::changeLevel(int direction, bool rand, string filename) {
 		else if (level == 3) lvl = make_unique<Level3> (seed);
 		else if (level == 4) lvl = make_unique<Level4> (seed);
 	} else if (direction == 0 && !rand) {
-		lvl = make_unique<NonRandom> (lvl->getLevel(), filename);
+		lvl = make_unique<NonRandom> (filename, lvl->getLevel());
 	} else if (direction != 0) {
 		int newLevel = lvl->getLevel() + direction;
 		if (newLevel < 0 || newLevel > maxLevel) return;
@@ -162,7 +169,16 @@ void BasicBoard::changeLevel(int direction, bool rand, string filename) {
 int BasicBoard::getScore() { return score; }
 
 void BasicBoard::getNextBlock() {
-	if (!nextBlock) nextBlock = make_unique<Block1> (lvl->nextBlock());
+	if (!nextBlock) {
+		char type = lvl->nextBlock()->getType();
+		if (type == 'I') nextBlock = make_unique<I>();
+		else if (type == 'J') nextBlock = make_unique<J>();
+		else if (type == 'L') nextBlock = make_unique<L>();
+		else if (type == 'O') nextBlock = make_unique<O>();
+		else if (type == 'S') nextBlock = make_unique<S>();
+		else if (type == 'Z') nextBlock = make_unique<Z>();
+		else nextBlock = make_unique<T>();
+	}
 }
 
 bool BasicBoard::inSpecialEffect() {
@@ -184,4 +200,14 @@ bool BasicBoard::validDownPos() {
 
 bool BasicBoard::validStartPos() {
 	return validMove(currentBlock->getPos());
+}
+
+void BasicBoard::changeCurrentBlock(char type) {
+	if (type == 'I') nextBlock = make_unique<I>();
+	else if (type == 'J') nextBlock = make_unique<J>();
+	else if (type == 'L') nextBlock = make_unique<L>();
+	else if (type == 'O') nextBlock = make_unique<O>();
+	else if (type == 'S') nextBlock = make_unique<S>();
+	else if (type == 'Z') nextBlock = make_unique<Z>();
+	else nextBlock = make_unique<T>();
 }

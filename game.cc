@@ -15,8 +15,8 @@ Game::Game(int startLevel, bool textOnly, string script1, string script2, unsign
 	brd1 = make_shared <BasicBoard> (1, startLevel, startLevel, textOnly, script1, seed);
 	brd2 = make_shared <BasicBoard> (2, startLevel, startLevel, textOnly, script2, seed);
 	if (defaultLevel >= 3) {
-		brd1 = make_shared<Heavy> (tmp);
-		brd2 = make_shared<Heavy> (tmp2);
+		brd1 = make_shared<Heavy> (brd1);
+		brd2 = make_shared<Heavy> (brd2);
 	}
 	brd1->getNextBlock();
 }
@@ -111,6 +111,9 @@ void Game::processDropCmd(int linesCleared, int board) {
 	if (board == 1) brd2->getNextBlock();
 	else brd1->getNextBlock();
 
+	// check game over
+	if (!brd1->validStartPos() || !brd2->validStartPos()) processWinner();
+
 	throw 1;
 }
 
@@ -163,13 +166,10 @@ void Game::processCommand(string command, int repeat, int board) {
 		tmp->turnBlock(repeat * -1);
 	else if (command == "drop") {
 		try {
-			int linesCleared = tmp->dropBlock();
-			processDropCmd(linesCleared, board);
+			tmp->dropBlock();
 		}
-		catch (char *gameOver) {
-			int score = tmp->getScore();
-			if (score > highscore) highscore = score;
-			processWinner();
+		catch (int linesCleared) {
+			processDropCmd(linesCleared, board);
 		}
 	}
 	else if (command == "levelup") {

@@ -5,7 +5,7 @@
 using namespace std;
 
 Force::Force(shared_ptr<Board> board, char changeBlockType): Decorator{board} {
-	board->currentBlock = make_unique<Block1> (0, changeBlockType);
+	board->changeCurrentBlock(changeBlockType);
 }
 
 int Force::dropBlock () {

@@ -2,6 +2,7 @@
 #include "stringGenerator.h"
 #include "state.h"
 #include <vector>
+#include <string>
 using namespace std;
 
 StringGenerator::StringGenerator() {
@@ -22,7 +23,8 @@ void StringGenerator::notify(Subject &whoNotified) { // update the display for o
 	State st = whoNotified.getState();
 	if (st.add) {
 		grid[st.coords.row][st.coords.col] = st.type;
-	} else {
+	}
+	else {
 		grid[st.coords.row][st.coords.col] = ' ';
 	}
 }
@@ -30,8 +32,8 @@ void StringGenerator::notify(Subject &whoNotified) { // update the display for o
 string StringGenerator::print(int level, int score, bool blind, char next) { // generate a string that represents one board
 	string str = "";
 
-	str += "Level:    " + level + "\n";
-	str += "Score:    " + score + "\n";
+	str += "Level:    " + to_string(level) + "\n";
+	str += "Score:    " + to_string(score) + "\n";
 
 	for (int i = 0; i < gridCols; ++i) {
 		str += "-";
@@ -45,7 +47,8 @@ string StringGenerator::print(int level, int score, bool blind, char next) { // 
 				if ((i >= 3 && i <= 12) || (j >= 3 && j <= 9)) {
 					str += "?";
 				}
-			} else {
+			}
+			else {
 				str += "" + grid[i][j];
 			}
 		}
@@ -59,31 +62,32 @@ string StringGenerator::print(int level, int score, bool blind, char next) { // 
 
 	str += "Next:\n";
 
-	if (next != null) {
+	if (next != ' ') {
 		switch (next) {
-			case 'I':
-				str += "           \nIIII       \n";
-				break;
-			case 'J':
-				str += "J          \nJJJ        \n";
-				break;
-			case 'L':
-				str += "  L        \nLLL        \n";
-				break;
-			case 'O':
-				str += "OO         \nOO         \n";
-				break;
-			case 'S':
-				str += " SS        \nSS         \n";
-				break;
-			case 'Z':
-				str += "ZZ         \n ZZ        \n";
-				break;
-			case 'T':
-				str += "TTT        \n T         \n";
-				break;
+		case 'I':
+			str += "           \nIIII       \n";
+			break;
+		case 'J':
+			str += "J          \nJJJ        \n";
+			break;
+		case 'L':
+			str += "  L        \nLLL        \n";
+			break;
+		case 'O':
+			str += "OO         \nOO         \n";
+			break;
+		case 'S':
+			str += " SS        \nSS         \n";
+			break;
+		case 'Z':
+			str += "ZZ         \n ZZ        \n";
+			break;
+		case 'T':
+			str += "TTT        \n T         \n";
+			break;
 		}
-	} else {
+	}
+	else {
 		str += "           \n           \n";
 	}
 

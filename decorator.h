@@ -24,6 +24,7 @@ public:
 	virtual bool originalPos() override;
 	virtual bool validDownPos() override;
 	virtual bool validStartPos() override;
+	virtual void changeCurrentBlock(char type) override;
 
 	std::shared_ptr<Board> removeDecorator();
 };

@@ -31,6 +31,7 @@ public:
 	virtual bool originalPos() = 0;
 	virtual bool validDownPos() = 0;
 	virtual bool validStartPos() = 0;
+	virtual void changeCurrentBlock(char type) = 0;
 };
 
 #endif

@@ -37,6 +37,7 @@ public:
 	bool originalPos() override;
 	bool validDownPos() override;
 	bool validStartPos() override;
+	void changeCurrentBlock(char type) override;
 };
 
 #endif
