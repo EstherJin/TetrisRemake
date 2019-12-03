@@ -12,6 +12,7 @@ protected:
     int lvl;
 public:
     Level (int n);
+	virtual ~Level();
     virtual char nextBlock() = 0;
     int getLevel();
     void changeLevel(int n);

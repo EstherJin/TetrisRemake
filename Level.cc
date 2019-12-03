@@ -7,6 +7,8 @@
 
 Level::Level (int n): lvl(n) {}
 
+Level::~Level() {}
+
 int Level::getLevel() {
     return lvl;
 }
