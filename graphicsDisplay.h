@@ -2,13 +2,30 @@
 // Created by Ordencia Wu on 2019-12-01.
 //
 
-#ifndef TETRIS_GRAPHICSDISPLAY_H
-#define TETRIS_GRAPHICSDISPLAY_H
+#ifndef GRAPHICSDISPLAY_H
+#define GRAPHICSDISPLAY_H
 
+#include "window.h"
+#include "observer.h"
+#include "info.h"
+#include "state.h"
 
-class graphicsDisplay {
+class GraphicsDisplay: public Observer {
+    const int cellLength = 34;
+    const int row = 18;
+    const int col = 11;
 
+    std::unique_ptr<Xwindow> window;
+    //~GraphicsDisplay();
+
+public:
+    GraphicsDisplay();
+    //GraphicsDisplay (int level, int score, bool blind, char next);
+    void notify (Subject &whoNotified) override;
+    void printLevel(int level);
+    void printScore(int score);
+    void printNext (char next);
 };
 
+#endif
 
-#endif //TETRIS_GRAPHICSDISPLAY_H
