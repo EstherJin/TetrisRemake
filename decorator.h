@@ -5,9 +5,9 @@
 
 class Decorator:public Board {
 protected:
-	std::unique_ptr<Board> board;
+	std::shared_ptr<Board> board;
 public:
-	Decorator(Board *b);
+	Decorator(shared_ptr<Board> b);
 	virtual ~Decorator();
 	virtual std::string print(bool blind = false) override;
 	virtual void turnBlock(int amount) override;

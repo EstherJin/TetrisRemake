@@ -3,7 +3,7 @@
 #include "decorator.h"
 using namespace std;
 
-Decorator::Decorator(Board *b): board {b} {}
+Decorator::Decorator(shared_ptr<Board> b): board {b} {}
 
 Decorator::~Decorator() {}
 
@@ -40,9 +40,7 @@ bool Decorator::inSpecialEffect() {
 void Decorator::setSpecialEffect(bool se) {
 	board->setSpecialEffect(se);
 }
-Board *Decorator::removeDecorator() {
-	Board *tmp = board.get();
-	board = nullptr;
-	return tmp;
+shared_ptr<Board> Decorator::removeDecorator() {
+	return board;
 }
 int Decorator:: getLevel() { board->getLevel(); }

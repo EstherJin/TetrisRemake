@@ -13,8 +13,8 @@ class Game {
 	bool textOnly;
 	std::string script1, script2;
 	unsigned seed;
-	std::unique_ptr<Board> brd1;
-	std::unique_ptr<Board> brd2;
+	std::shared_ptr<Board> brd1;
+	std::shared_ptr<Board> brd2;
 	TextDisplay td;
 public:
 	Game(int startLevel = 0, bool textOnly = false, std::string script1 = "sequence1.txt", std::string script2 = "sequence2.txt", unsigned seed = 0);
