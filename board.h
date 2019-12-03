@@ -8,6 +8,7 @@
 #include "block2.h"
 #include "Level.h"
 #include "stringGenerator.h"
+#include "graphicsDisplay"
 #include "row.h"
 
 class Block1;
