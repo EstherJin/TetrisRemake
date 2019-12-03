@@ -3,7 +3,7 @@
 #include "cell.h"
 
 class Row {
-  vector<Cell> roww;
+  std::vector<Cell> roww;
   int rowNum;
  public:
   Row(int rowNum, Observer *ob);
