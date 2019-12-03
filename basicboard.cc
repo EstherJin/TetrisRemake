@@ -128,6 +128,7 @@ int BasicBoard::dropBlock() {
 			for (int j = i; j >= 0; --j) {
 				grid[j].changeRowNum(j);
 			}
+			++i;
 		}
 	}
 
