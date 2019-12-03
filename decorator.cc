@@ -8,7 +8,7 @@ Decorator::Decorator(shared_ptr<Board> b): board {b} {}
 Decorator::~Decorator() {}
 
 std::string Decorator::print(bool blind) {
-	board->print(blind);
+	return board->print(blind);
 }
 void Decorator::turnBlock(int amount) {
 	board->turnBlock(amount);
