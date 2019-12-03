@@ -51,6 +51,6 @@ bool Decorator::validDownPos() {
 	return board->validDownPos();
 }
 
-bool validStartPos() {
+bool Decorator::validStartPos() {
 	return board->validStartPos();
 }

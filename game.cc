@@ -111,9 +111,6 @@ void Game::processDropCmd(int linesCleared, int board) {
 	if (board == 1) brd2->getNextBlock();
 	else brd1->getNextBlock();
 
-	// check game over
-	if (!brd1->validStartPos() || !brd2->validStartPos()) processWinner();
-
 	throw 1;
 }
 
@@ -166,10 +163,13 @@ void Game::processCommand(string command, int repeat, int board) {
 		tmp->turnBlock(repeat * -1);
 	else if (command == "drop") {
 		try {
-			tmp->dropBlock();
-		}
-		catch (int linesCleared) {
+			int linesCleared = tmp->dropBlock();
 			processDropCmd(linesCleared, board);
+		}
+		catch (char *gameOver) {
+			int score = tmp->getScore();
+			if (score > highscore) highscore = score;
+			processWinner();
 		}
 	}
 	else if (command == "levelup") {
