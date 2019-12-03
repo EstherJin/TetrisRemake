@@ -24,6 +24,11 @@ Game::Game(int startLevel, bool textOnly, string script1, string script2, unsign
 void Game::restart() {
 	brd1 = make_shared<BasicBoard> (1, defaultLevel, defaultLevel, textOnly, script1, seed);
 	brd2 = make_shared<BasicBoard> (2, defaultLevel, defaultLevel, textOnly, script2, seed);
+	if (defaultLevel >= 3) {
+		brd1 = make_shared<Heavy> (brd1);
+		brd2 = make_shared<Heavy> (brd2);
+	}
+	brd1->getNextBlock();
 }
 
 void Game::print(ostream &out) {
