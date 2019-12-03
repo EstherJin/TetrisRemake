@@ -114,7 +114,7 @@ int BasicBoard::dropBlock() {
 	vector<Coordinates> blockCoords = currentBlock->getPos();
   for (auto coord:blockCoords) {
 		grid[coord.row].changeCell(coord.col, currentBlock->getType());
-		grid[coord.row].attachObserver(coord.col, &activeBlocks.back());
+		grid[coord.row].attachObserver(coord.col, &b2);
 	}
 
 	// check lines cleared
@@ -132,7 +132,7 @@ int BasicBoard::dropBlock() {
 	}
 
 	// calculate score
-	if (linesCleared > 0) score += (lvl->getLevel() + linesCleared) * (lvl->getLevel() + linesCleared);
+	score += (lvl->getLevel() + linesCleared) * (lvl->getLevel() + linesCleared);
 	for (int i = 0; i < activeBlocks.size(); ++i) {
 		if (activeBlocks[i].checkDeleted()) {
 			score += (activeBlocks[i].getLevelDropped() + 1) * (activeBlocks[i].getLevelDropped() + 1);
