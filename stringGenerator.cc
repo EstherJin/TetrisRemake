@@ -49,7 +49,7 @@ string StringGenerator::print(int level, int score, bool blind, char next) { // 
 				}
 			}
 			else {
-				str += "" + grid[i][j];
+				str += grid.at(i).at(j);
 			}
 		}
 		str += "\n";
