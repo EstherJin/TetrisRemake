@@ -54,6 +54,7 @@ int main(int argc, char *argv[]) {
   try {
   while (true) {
     cin >> cmd;
+	if (cin.eof()) break;
     string comm;
     interpret.processCommands(cmd, &g, &turn);
   }
