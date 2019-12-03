@@ -70,7 +70,7 @@ void Interpreter::processCommands(string cmd, Game *g, int *turn){
       } catch(int i){
         *turn = (*turn % 2) + 1;
         g->print(cout);
-      } catch(char* str){
+      } catch(char const* str){
         cout << "Restart? Yes/No:";
         string s;
         while (cin >> s){
@@ -93,10 +93,10 @@ void Interpreter::processCommands(string cmd, Game *g, int *turn){
       } catch(int i){
         *turn = (*turn % 2) + 1;
         g->print(cout);
-      } catch(char* str){
+      } catch(char const* str){
         *turn = 1;
         g->processCommand(command, n, *turn);
-      } catch(char* str){
+      } catch(char const* str){
         cout << "Restart? Yes/No:";
         string s;
         while (cin >> s){

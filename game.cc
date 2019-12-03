@@ -135,7 +135,7 @@ void Game::processCommand(string command, int repeat, int board) {
 		try {
 			tmp->moveBlock(repeat * -1);
 		}
-		catch (char *gameOver) {
+		catch (char const*gameOver) {
 			processWinner();
 		}
 		catch (int linesCleared) {
@@ -146,7 +146,7 @@ void Game::processCommand(string command, int repeat, int board) {
 		try {
 			tmp->moveBlock(repeat);
 		}
-		catch (char *gameOver) {
+		catch (char const*gameOver) {
 			processWinner();
 		}
 		catch (int linesCleared) {
@@ -157,7 +157,7 @@ void Game::processCommand(string command, int repeat, int board) {
 		try {
 			tmp->downBlock(repeat);
 		}
-		catch (char *gameOver) {
+		catch (char const*gameOver) {
 			processWinner();
 		}
 		catch (int linesCleared) {
