@@ -132,7 +132,7 @@ int BasicBoard::dropBlock() {
 	}
 
 	// calculate score
-	score += (lvl->getLevel() + linesCleared) * (lvl->getLevel() + linesCleared);
+	if (linesCleared > 0)  score += (lvl->getLevel() + linesCleared) * (lvl->getLevel() + linesCleared);
 	for (int i = 0; i < activeBlocks.size(); ++i) {
 		if (activeBlocks[i].checkDeleted()) {
 			score += (activeBlocks[i].getLevelDropped() + 1) * (activeBlocks[i].getLevelDropped() + 1);
