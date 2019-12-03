@@ -40,6 +40,7 @@ BasicBoard::BasicBoard(int player, bool random, int level, bool textOnly, string
 	getNextBlock();
 	currentBlock = nullptr;
 	std::swap(currentBlock, nextBlock);
+	currentBlock->attach(&sg);
 	currentBlock->notifCurrPos();
 }
 
@@ -53,12 +54,13 @@ string BasicBoard::print(bool blind) {
 
 bool BasicBoard::validMove(vector<Coordinates> newPos) {
 	for (int i = 0; i < newPos.size(); ++i) {
+cout << "in loop" <<endl;
 		int roww = newPos.at(i).row;
 		int coll = newPos.at(i).col;
 		if ((roww < 0) || (roww > 17) || (coll < 0) || (coll > 10)){
 			return false;
 		}
-		char c = grid[roww].at(coll);
+		char c = grid.at(roww).at(coll);
 		if (c != ' ') return false;
 	}
 	return true;
@@ -71,7 +73,9 @@ int abs(int num) {
 
 void BasicBoard::turnBlock(int amount) {
 	for (int i = 0; i < abs(amount); ++i) {
+	cout << "hi" <<endl;
 		bool valid = validMove(currentBlock->turnPos(amount/abs(amount)));
+	cout << valid <<endl;
 		if (valid) currentBlock->turn(amount/abs(amount));
 		else break;
 	}
@@ -106,6 +110,7 @@ int BasicBoard::dropBlock() {
 	}
 
 	// change to block 2
+	currentBlock->detach();
 	Block2 b2(4,lvl->getLevel());
 	activeBlocks.emplace_back(b2);
 	vector<Coordinates> blockCoords = currentBlock->getPos();
@@ -140,6 +145,7 @@ int BasicBoard::dropBlock() {
 	// switch blocks
 	currentBlock = nullptr;
 	std::swap(currentBlock, nextBlock);
+	currentBlock->attach(&sg);
 	currentBlock->notifCurrPos();
 
 	// check game over
@@ -173,7 +179,7 @@ int BasicBoard::getScore() { return score; }
 
 void BasicBoard::getNextBlock() {
 	if (!nextBlock) {
-		char type = lvl->nextBlock();
+		char type = lvl->nextBlock()->getType();
 		if (type == 'I') nextBlock = make_unique<I>();
 		else if (type == 'J') nextBlock = make_unique<J>();
 		else if (type == 'L') nextBlock = make_unique<L>();

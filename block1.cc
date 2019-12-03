@@ -28,8 +28,10 @@ void Block1::move(int shift){
     State stat = {' ', coords[i], false};
     setState(stat);
     notifyObservers();
+  }
+  for (int i = 0; i < coords.size(); ++i){
     coords.at(i).col += shift;
-    stat = {c, coords[i], true};
+    State stat = {c, coords[i], true};
     setState(stat);
     notifyObservers();
   }
@@ -49,8 +51,10 @@ void Block1::down(int shift){
     State stat = {' ', coords[i], false};
     setState(stat);
     notifyObservers();
+  }
+  for (int i = 0; i < coords.size(); ++i){
     coords.at(i).row += shift;
-    stat = {c, coords[i], true};
+    State stat = {c, coords[i], true};
     setState(stat);
     notifyObservers();
   }
@@ -63,4 +67,13 @@ vector<Coordinates> Block1::downPos(int shift){
     cds.at(i).row += shift;
   }
   return cds;
+}
+
+void Block1::notifCurrPos(){
+  int size = coords.size();
+  for (int i = 0; i < size; ++i){
+    State stat = {c, coords[i], true};
+    setState(stat);
+    notifyObservers();
+  }
 }

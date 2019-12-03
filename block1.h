@@ -22,6 +22,7 @@ public:
   char getType();
   vector<Coordinates> getPos();
   bool origPos();
+  virtual void notifCurrPos();
 };
 
 #endif
