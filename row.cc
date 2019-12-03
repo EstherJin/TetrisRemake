@@ -10,12 +10,6 @@ Row::Row(int rowNum,  Observer *ob, Observer *ob2): rowNum{rowNum}{
   }
 }
 
-Row::~Row(){
-  for(int i = 0; i < 11; ++i){
-    roww.at(i).clearCell();
-  }
-}
-
 bool Row::checkFull(){
   for(int i = 0; i < 11; ++i){
     if (roww.at(i).getChar() == ' '){

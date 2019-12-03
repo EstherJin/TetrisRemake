@@ -6,8 +6,8 @@
 class BasicBoard:public Board {
 	StringGenerator sg;
 	GraphicsDisplay gd;
-	std::vector<Row> grid;
 	std::vector<Block2> activeBlocks;
+	std::vector<Row> grid;
 	int score = 0;
 	std::unique_ptr<Level> lvl;
 	std::unique_ptr<Block1> nextBlock;
