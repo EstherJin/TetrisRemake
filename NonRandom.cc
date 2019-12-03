@@ -23,7 +23,7 @@ using namespace std;
 NonRandom::NonRandom (string file, int n): Level(n) {
     fileName = file; // add a string here called sequence, load the file into string
     ifstream f {fileName};
-    f >> sequence;
+	getline(f, sequence);
 }
 
 Block1 *NonRandom::nextBlock() { //use istringstream to load one char at a time and substr, reload when empty
@@ -64,7 +64,7 @@ Block1 *NonRandom::nextBlock() { //use istringstream to load one char at a time 
                     next = new O ();
                     break;
             }
-            sequence = sequence.substr(2);
+            sequence = sequence.substr(1);
             break;
         } else {
             ifstream f{fileName};
