@@ -32,7 +32,30 @@ void Game::print(ostream &out) {
 	td.print(out, td1, td2);
 }
 
-void Game::processDropCmd(int linesCleared) {
+void Game::processWinner() {
+	// calculate scores
+	if (brd1->getScore() > brd2->getScore()) {
+		cout << "Winner is Player 1!!! :)" << endl;
+	} else if (brd2->getScore() > brd1->getScore()) {
+		cout << "Winner is Player 2!!! :)" << endl;
+	} else {
+		cout << "Tie! Good game everyone :)" << endl;
+	}
+	throw "end game";
+}
+
+void Game::processDropCmd(int linesCleared, int board) {
+	Board *tmp;
+	Board *tmp2;
+	if (board == 1) {
+		tmp = brd1.get();
+		tmp2 = brd2.get();
+	}
+	else if (board == 2) {
+		tmp = brd2.get();
+		tmp2 = brd1.get();
+	}
+
 	int score = tmp->getScore();
 	if (score > highscore) highscore = score;
 
@@ -87,6 +110,11 @@ void Game::processDropCmd(int linesCleared) {
 	}
 	if (board == 1) brd2->getNextBlock();
 	else brd1->getNextBlock();
+
+	// check game over
+	if (!brd1->validStartPos() || !brd2->validStartPos()) processWinner();
+
+	throw 1;
 }
 
 void Game::processCommand(string command, int repeat, int board) {
@@ -105,29 +133,44 @@ void Game::processCommand(string command, int repeat, int board) {
 			tmp->moveBlock(repeat * -1);
 		}
 		catch (char *gameOver) {
-			// calculate scores
-			if (brd1->getScore() > brd2->getScore()) {
-				cout << "Winner is Player 1!!! :)" << endl;
-			} else if (brd2->getScore() > brd1->getScore()) {
-				cout << "Winner is Player 2!!! :)" << endl;
-			} else {
-				cout << "Tie! Good game everyone :)" << endl;
-			}
+			processWinner();
 		}
 		catch (int linesCleared) {
-
+			processDropCmd(linesCleared, board);
 		}
 	}
-	else if (command == "right")
-		tmp->moveBlock(repeat);
+	else if (command == "right") {
+		try {
+			tmp->moveBlock(repeat);
+		}
+		catch (char *gameOver) {
+			processWinner();
+		}
+		catch (int linesCleared) {
+			processDropCmd(linesCleared, board);
+		}
+	}
 	else if (command == "down")
-		tmp->downBlock(repeat);
+		try {
+			tmp->downBlock(repeat);
+		}
+		catch (char *gameOver) {
+			processWinner();
+		}
+		catch (int linesCleared) {
+			processDropCmd(linesCleared, board);
+		}
 	else if (command == "clockwise")
 		tmp->turnBlock(repeat);
 	else if (command == "counterclockwise")
 		tmp->turnBlock(repeat * -1);
 	else if (command == "drop") {
-		
+		try {
+			tmp->dropBlock();
+		}
+		catch (int linesCleared) {
+			processDropCmd(linesCleared, board);
+		}
 	}
 	else if (command == "levelup") {
 		tmp->changeLevel(repeat, false, "");

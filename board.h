@@ -30,6 +30,7 @@ public:
 	virtual int getLevel()=0;
 	virtual bool originalPos() = 0;
 	virtual bool validDownPos() = 0;
+	virtual bool validStartPos() = 0;
 };
 
 #endif

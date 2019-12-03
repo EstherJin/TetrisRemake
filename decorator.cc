@@ -50,3 +50,7 @@ bool Decorator::originalPos() { return board->originalPos(); }
 bool Decorator::validDownPos() {
 	return board->validDownPos();
 }
+
+bool validStartPos() {
+	return board->validStartPos();
+}

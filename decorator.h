@@ -23,6 +23,7 @@ public:
 	virtual int getLevel() override;
 	virtual bool originalPos() override;
 	virtual bool validDownPos() override;
+	virtual bool validStartPos() override;
 
 	std::shared_ptr<Board> removeDecorator();
 };
