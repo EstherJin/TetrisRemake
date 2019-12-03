@@ -19,7 +19,7 @@ void I::turn(int shift){
       stat = {c, coords.at(2), true};
       setState(stat);
       notifyObservers();
-      State stat = {' ', coords.at(3), false};
+      stat = {' ', coords.at(3), false};
       setState(stat);
       notifyObservers();
       coords.at(3).row -= 1;
@@ -27,7 +27,7 @@ void I::turn(int shift){
       stat = {c, coords.at(3), true};
       setState(stat);
       notifyObservers();
-      State stat = {' ', coords.at(4), false};
+      stat = {' ', coords.at(4), false};
       setState(stat);
       notifyObservers();
       coords.at(4).row -= 1;
@@ -45,7 +45,7 @@ void I::turn(int shift){
       stat = {c, coords.at(2), true};
       setState(stat);
       notifyObservers();
-      State stat = {' ', coords.at(3), false};
+      stat = {' ', coords.at(3), false};
       setState(stat);
       notifyObservers();
       coords.at(3).row += 1;
@@ -53,7 +53,7 @@ void I::turn(int shift){
       stat = {c, coords.at(3), true};
       setState(stat);
       notifyObservers();
-      State stat = {' ', coords.at(4), false};
+      stat = {' ', coords.at(4), false};
       setState(stat);
       notifyObservers();
       coords.at(4).row += 1;

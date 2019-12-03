@@ -6,7 +6,7 @@ using namespace std;
 Heavy::Heavy(shared_ptr<Board> board): Decorator{board} {}
 
 void Heavy::moveBlock(int amount) {
-	board->moveBlock();
+	board->moveBlock(amount);
 	downBlock(2);
 }
 
