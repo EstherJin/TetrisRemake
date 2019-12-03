@@ -37,6 +37,7 @@ BasicBoard::BasicBoard(int player, bool random, int level, bool textOnly, string
 	else if (level == 4) lvl = make_unique<Level4> (seed);
 	else lvl = make_unique<NonRandom> (script, level);
 
+	getNextBlock();
 	currentBlock = nullptr;
 	std::swap(currentBlock, nextBlock);
 }
