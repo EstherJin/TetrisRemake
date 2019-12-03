@@ -7,7 +7,5 @@ using namespace std;
 Blind::Blind(Board *b): Board{}, Decorator{b} {}
 
 string Board::print(bool blind) {
-	char type = ' ';
-	if (nextBlock) type = nextBlock->getType();
-	return sg.print(lvl->getLevel(), score, true, type);
+	board->print(true);
 }
