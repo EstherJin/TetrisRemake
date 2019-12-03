@@ -9,7 +9,7 @@ private:
   int levelDropped;
 public:
   Block2();
-  virtual ~Block2();
+  virtual ~Block2(int cellCount, int levelDropped);
   bool checkDeleted();
   int getLevelDropped();
   void notify(Subject &whoFrom) override;

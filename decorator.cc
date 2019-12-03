@@ -47,6 +47,6 @@ int Decorator::getLevel() { board->getLevel(); }
 
 bool Decorator::originalPos() { return board->originalPos(); }
 
-bool Decorator::validDownPos() override {
+bool Decorator::validDownPos() {
 	return board->validDownPos();
 }
