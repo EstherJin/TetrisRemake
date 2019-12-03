@@ -33,6 +33,7 @@ public:
 	int getLevel() override;
 	bool originalPos() override;
 	bool validDownPos() override;
+	bool validStartPos() override;
 };
 
 #endif

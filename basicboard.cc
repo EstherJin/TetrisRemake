@@ -177,3 +177,7 @@ bool BasicBoard::validDownPos() {
 	if (!validMove(currentBlock->downPos(1))) return false;
 	return true;
 }
+
+bool BasicBoard::validStartPos() {
+	return validMove(currentBlock->getPos());
+}
