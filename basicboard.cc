@@ -40,6 +40,7 @@ BasicBoard::BasicBoard(int player, bool random, int level, bool textOnly, string
 	getNextBlock();
 	currentBlock = nullptr;
 	std::swap(currentBlock, nextBlock);
+	currentBlock->notifCurrPos();
 }
 
 BasicBoard::~BasicBoard() {}
@@ -139,6 +140,7 @@ int BasicBoard::dropBlock() {
 	// switch blocks
 	currentBlock = nullptr;
 	std::swap(currentBlock, nextBlock);
+	currentBlock->notifCurrPos();
 
 	// check game over
 	if (!validMove(currentBlock->getPos())) {
