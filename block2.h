@@ -8,7 +8,7 @@ private:
   int cellCount;
   int levelDropped;
 public:
-  Block2();
+  Block2(int cellCount, int levelDropped);
   virtual ~Block2();
   bool checkDeleted();
   int getLevelDropped();

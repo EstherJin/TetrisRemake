@@ -3,22 +3,18 @@
 #include "heavy.h"
 using namespace std;
 
-Heavy::Heavy(Board *b): Decorator{b} {}
+Heavy::Heavy(shared_ptr<Board> board): Decorator{board} {}
 
-void Heavy::moveBlock(int amount) override {
-	for (int i = 0; i < abs(amount); ++i) {
-		bool valid = board->validMove(board->currentBlock->movePos(amount/abs(amount)));
-		if (valid) board->currentBlock->move(amount/abs(amount));
-		else break;
-	}
-	board->downBlock(2);
+void Heavy::moveBlock(int amount) {
+	board->moveBlock(amount);
+	downBlock(2);
 }
 
-void Heavy::downBlock(int amount) override {
+void Heavy::downBlock(int amount) {
 	for (int i = 0; i < abs(amount); ++i) {
-		bool valid = board->validMove(board->currentBlock->downPos(1));
+		bool valid = board->validDownPos();
 		if (valid) {
-			board->currentBlock->down(1);
+			board->downBlock(1);
 		}
 		else board->dropBlock();
 	}

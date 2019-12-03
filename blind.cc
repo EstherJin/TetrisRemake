@@ -1,12 +1,11 @@
 #include "board.h"
 #include "decorator.h"
 #include "blind.h"
+#include "block1.h"
 using namespace std;
 
-Blind::Blind(Board *b): Decorator{b} {}
+Blind::Blind(shared_ptr<Board> board): Decorator{board} {}
 
-string Board::print(bool blind) {
-	char type = ' ';
-	if (nextBlock) type = nextBlock->getType();
-	return sg->print(lvl->getLevel(), score, true, type);
+string Blind::print(bool blind) {
+	board->print(true);
 }

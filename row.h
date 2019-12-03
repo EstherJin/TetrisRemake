@@ -3,10 +3,10 @@
 #include "cell.h"
 
 class Row {
-  vector<Cell> roww;
+  std::vector<Cell> roww;
   int rowNum;
  public:
-  Row(int rowNum, Observer *ob);
+  Row(int rowNum, Observer *ob, Observer *ob2);
   ~Row();
   bool checkFull();
   void changeRowNum(int row);

@@ -4,7 +4,7 @@
 
 class Heavy:public Decorator {
 public:
-	Heavy(Board *b);
+	Heavy(std::shared_ptr<Board> board);
 	void moveBlock(int amount) override;
 	void downBlock(int amount) override;
 };

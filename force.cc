@@ -4,12 +4,12 @@
 #include "force.h"
 using namespace std;
 
-Force::Force(Board *b, char changeBlockType): Decorator{b} {
-	board->currentBlock = make_unique<Block1> {0, changeBlockType};
+Force::Force(shared_ptr<Board> board, char changeBlockType): Decorator{board} {
+	board->changeCurrentBlock(changeBlockType);
 }
 
-int Force::dropBlock () override {
-	if (board->currentBlock->origPos()) {
+int Force::dropBlock () {
+	if (board->originalPos()) {
 		int lines = board->dropBlock();
 		return lines;
 	} else {

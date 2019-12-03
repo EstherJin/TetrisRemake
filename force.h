@@ -4,7 +4,7 @@
 
 class Force:public Decorator {
 public:
-	Force(Board *b, char changeBlockType);
+	Force(std::shared_ptr<Board> board, char changeBlockType);
 	int dropBlock () override;
 };
 

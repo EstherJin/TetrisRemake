@@ -5,9 +5,9 @@
 
 class Decorator:public Board {
 protected:
-	std::unique_ptr<Board> board;
+	std::shared_ptr<Board> board;
 public:
-	Decorator(Board *b);
+	Decorator(std::shared_ptr<Board> b);
 	virtual ~Decorator();
 	virtual std::string print(bool blind = false) override;
 	virtual void turnBlock(int amount) override;
@@ -21,8 +21,12 @@ public:
 	virtual bool inSpecialEffect() override;
 	virtual void setSpecialEffect(bool se = true) override;
 	virtual int getLevel() override;
+	virtual bool originalPos() override;
+	virtual bool validDownPos() override;
+	virtual bool validStartPos() override;
+	virtual void changeCurrentBlock(char type) override;
 
-	Board *removeDecorator();
+	std::shared_ptr<Board> removeDecorator();
 };
 
 #endif

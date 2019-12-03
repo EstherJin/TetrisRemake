@@ -71,7 +71,7 @@ void J::turn(int shift){
       notifyObservers();
       coords.at(3).row -= 1;
       coords.at(3).col -= 1;
-      tat = {c, coords.at(3), true};
+      stat = {c, coords.at(3), true};
       setState(stat);
       notifyObservers();
     } else {

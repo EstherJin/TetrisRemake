@@ -67,7 +67,7 @@ void L::turn(int shift){
       stat = {c, coords.at(3), true};
       setState(stat);
       notifyObservers();
-    } else {}
+    } else {
       State stat = {' ', coords.at(1), false};
       setState(stat);
       notifyObservers();

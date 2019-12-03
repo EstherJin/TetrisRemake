@@ -25,7 +25,7 @@ void Cell::changerow(int row){
   setState(stat);
   notifyObservers();
   coords.row = row;
-  State stat = {type, coords, true};
+  stat = {type, coords, true};
   setState(stat);
   notifyObservers();
 }

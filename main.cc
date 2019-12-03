@@ -54,9 +54,12 @@ int main(int argc, char *argv[]) {
   try {
   while (true) {
     cin >> cmd;
+	if (cin.eof()) break;
     string comm;
     interpret.processCommands(cmd, &g, &turn);
   }
   }
   catch (ios::failure &) {}
+  catch (int i){}
+  cout << "Thanks for playing!"<< endl;
 }

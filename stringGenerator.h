@@ -1,7 +1,11 @@
 #ifndef _STRINGGENERATOR_H_
 #define _STRINGGENERATOR_H_
+#include <vector>
+#include <string>
+#include "observer.h"
 
 class Cell;
+class Subject;
 
 class StringGenerator: public Observer {
   std::vector<std::vector<char>> grid;

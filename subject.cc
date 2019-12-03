@@ -1,4 +1,5 @@
 #include "subject.h"
+#include "observer.h"
 using namespace std;
 
 void Subject::attach(Observer *o) {
@@ -16,4 +17,3 @@ void Subject::notifyObservers() {
 void Subject::setState(State newS) { state = newS; }
 
 State Subject::getState() const { return state; }
-#endif

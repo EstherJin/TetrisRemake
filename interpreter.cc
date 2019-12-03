@@ -64,13 +64,50 @@ void Interpreter::processCommands(string cmd, Game *g, int *turn){
         cin.rdbuf(cinbuf);
       }
     } else if (command == "drop") {
+      try{
       g->processCommand(command, n, *turn);
-      *turn = (*turn % 2) + 1;
       g->print(cout);
+      } catch(int i){
+        *turn = (*turn % 2) + 1;
+        g->print(cout);
+      } catch(char* str){
+        cout << "Restart? Yes/No:";
+        string s;
+        while (cin >> s){
+          if (s == "Yes"){
+            *turn = 1;
+            g->processCommand(command, n, *turn);
+            return;
+          }
+        }
+        throw 1;
+      }
     } else if (command == "restart") {
-      g->processCommand(command, n, *turn);
       *turn = 1;
+      g->processCommand(command, n, *turn);
       g->print(cout);
+    } else if ((command == "left")||(command == "right")||(command == "down")) {
+      try{
+      g->processCommand(command, n, *turn);
+      g->print(cout);
+      } catch(int i){
+        *turn = (*turn % 2) + 1;
+        g->print(cout);
+      } catch(char* str){
+        *turn = 1;
+        g->processCommand(command, n, *turn);
+      } catch(char* str){
+        cout << "Restart? Yes/No:";
+        string s;
+        while (cin >> s){
+          if (s == "Yes"){
+            *turn = 1;
+            g->processCommand(command, n, *turn);
+            return;
+          }
+        }
+        throw 1;
+      }
     } else {
       g->processCommand(command, n, *turn);
       g->print(cout);
