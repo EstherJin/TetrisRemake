@@ -148,3 +148,7 @@ void GraphicsDisplay::printNext (char next) {
         window->fillRectangle(xmar, 712, 405, 150, 0);
     }
 }
+
+void GraphicsDisplay::blind () {
+    window->fillRectangle(xmar+2*cellLength, ymar+2*cellLength, 7*cellLength, 10*cellLength, 1);
+}

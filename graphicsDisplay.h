@@ -27,6 +27,7 @@ public:
     void printLevel(int level);
     void printScore(int score);
     void printNext (char next);
+    void blind();
 };
 
 #endif
