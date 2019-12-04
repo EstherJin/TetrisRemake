@@ -139,6 +139,7 @@ int BasicBoard::dropBlock() {
 			}
 			grid[i].notifAbout();
 			++i;
+			grid[i].notifAbout();
 		}
 	}
 
