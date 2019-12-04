@@ -20,7 +20,7 @@
 #include "Level4.h"
 #include "NonRandom.h"
 #include "stringGenerator.h"
-// #include "graphicsDisplay.h"
+#include "graphicsDisplay.h"
 #include "coordinates.h"
 #include "basicboard.h"
 using namespace std;
@@ -37,10 +37,15 @@ BasicBoard::BasicBoard(int player, bool random, int level, bool textOnly, string
 	else if (level == 4) lvl = make_unique<Level4> (seed);
 	else lvl = make_unique<NonRandom> (script, level);
 
+	gd.printLevel(level);
+	gd.printScore(printScore);
+
 	getNextBlock();
 	currentBlock = nullptr;
 	std::swap(currentBlock, nextBlock);
+	gd.printNext(' ');
 	currentBlock->attach(&sg);
+	currentBlock->attach(&gd);
 	currentBlock->notifCurrPos();
 }
 
@@ -140,6 +145,7 @@ int BasicBoard::dropBlock() {
 			activeBlocks.erase(activeBlocks.begin() + i);
 		}
 	}
+	gd.printScore(score);
 
 	// switch blocks
 	currentBlock = nullptr;
@@ -152,6 +158,7 @@ int BasicBoard::dropBlock() {
 	}
 
 	currentBlock->attach(&sg);
+	currentBlock->attach(&gd);
 	currentBlock->notifCurrPos();
 
 	return linesCleared;
@@ -173,6 +180,7 @@ void BasicBoard::changeLevel(int direction, bool rand, string filename) {
 		else if (newLevel == 2) lvl = make_unique<Level2> (seed);
 		else if (newLevel == 3) lvl = make_unique<Level3> (seed);
 		else if (newLevel == 4) lvl = make_unique<Level4> (seed);
+		gd.printLevel(newLevel);
 	}
 }
 
@@ -188,6 +196,7 @@ void BasicBoard::getNextBlock() {
 		else if (type == 'S') nextBlock = make_unique<S>();
 		else if (type == 'Z') nextBlock = make_unique<Z>();
 		else nextBlock = make_unique<T>();
+		gd.printNext(type);
 	}
 }
 
@@ -221,5 +230,6 @@ void BasicBoard::changeCurrentBlock(char type) {
 	else if (type == 'Z') currentBlock = make_unique<Z>();
 	else currentBlock = make_unique<T>();
 	currentBlock->attach(&sg);
+	currentBlock->attach(&gd);
 	currentBlock->notifCurrPos();
 }
