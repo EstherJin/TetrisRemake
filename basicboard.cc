@@ -117,11 +117,11 @@ int BasicBoard::dropBlock() {
 
 	// change to block 2
 	currentBlock->detach();
-	currentBlock->detach();
+	if (!textOnly) currentBlock->detach();
 	Block2 b2(4,lvl->getLevel());
 	activeBlocks.emplace_back(b2);
 	vector<Coordinates> blockCoords = currentBlock->getPos();
-  for (auto coord:blockCoords) {
+  	for (auto coord:blockCoords) {
 		grid[coord.row].changeCell(coord.col, currentBlock->getType());
 		grid[coord.row].attachObserver(coord.col, &b2);
 	}
