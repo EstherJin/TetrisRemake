@@ -121,18 +121,19 @@ vector<Coordinates> J::turnPos(int shift){
   } else{
     shift = ((-4 * shift) - (shift * -1)) % 4;
   }
+  int pos = position;
   while (shift > 0){
-    if (position == 0){
+    if (pos == 0){
       cds.at(2).row -= 2;
       cds.at(3).row -= 2;
       cds.at(3).col -= 2;
-    } else if (position == 1) {
+    } else if (pos == 1) {
       cds.at(1).col += 2;
       cds.at(2).row += 1;
       cds.at(2).col += 1;
       cds.at(3).row += 1;
       cds.at(3).col += 1;
-    } else if (position == 2) {
+    } else if (pos == 2) {
       cds.at(0).row += 1;
       cds.at(1).col -= 1;
       cds.at(2).row -= 1;
@@ -144,6 +145,7 @@ vector<Coordinates> J::turnPos(int shift){
       cds.at(3).row += 1;
       cds.at(3).col += 1;
     }
+    pos = (pos + 1) % 4;
     --shift;
   }
   return cds;
