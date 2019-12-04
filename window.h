@@ -13,7 +13,7 @@ class Xwindow {
     Window w;
     int s;
     GC gc;
-    unsigned long colours[11];
+    unsigned long colours[12];
     int player;
 
 public:
@@ -24,7 +24,7 @@ public:
 
     enum {PapayaWhip=0, gray20, MediumPurple3,
         RoyalBlue4, tomato4, goldenrod1,
-        SeaGreen, sienna1, turquoise, SaddleBrown, White}; // Available colours.
+        SeaGreen, sienna1, turquoise, SaddleBrown, White, Brown}; // Available colours.
 
     // Draws a rectangle
     void fillRectangle(int x, int y, int width, int height, int colour=PapayaWhip);

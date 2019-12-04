@@ -45,11 +45,11 @@ Xwindow::Xwindow(int width, int height, int player) {
     XColor xcolour;
     Colormap cmap;
 
-    const size_t numColours = 11;
+    const size_t numColours = 12;
     char color_vals[numColours][20] = {
             "PapayaWhip", "gray20", "MediumPurple3",
             "RoyalBlue4", "tomato4", "goldenrod1",
-            "SeaGreen", "sienna1", "turquoise", "SaddleBrown", "White"
+            "SeaGreen", "sienna1", "turquoise", "SaddleBrown", "White", "Brown"
     };
 
     cmap = DefaultColormap(d, DefaultScreen(d));
