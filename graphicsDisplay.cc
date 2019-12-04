@@ -62,18 +62,15 @@ void GraphicsDisplay::notify (Subject &whoNotified) {
             window->fillRectangle(xmar + st.coords.col * cellLength,
                                   ymar + st.coords.row * cellLength,
                                   cellLength, cellLength, 8);
+        } else if (st.type == '*') {
+            window->fillRectangle(xmar + st.coords.col * cellLength,
+                                  ymar + st.coords.row * cellLength,
+                                  cellLength, cellLength, 11);
         }
     } else {
         window->fillRectangle(xmar + st.coords.col * cellLength,
                               ymar + st.coords.row * cellLength,
                               cellLength, cellLength, 0);
-
-        for (int i = 1; i < row; i++) {
-            window->fillRectangle(xmar,ymar+i*34,375,1,10);
-        }
-        for (int j = 1; j < col; j++) {
-            window->fillRectangle(xmar+j*34,ymar,1,612,10);
-        }
 
     }
     for (int i = 1; i < row; i++) {
