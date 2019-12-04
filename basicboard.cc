@@ -240,3 +240,7 @@ void BasicBoard::changeCurrentBlock(char type) {
 	if (!textOnly) currentBlock->attach(&gd);
 	currentBlock->notifCurrPos();
 }
+
+void BasicBoard::printGraphicsBlind() {
+	gd.blind();
+}
