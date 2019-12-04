@@ -92,7 +92,7 @@ void GraphicsDisplay::printLevel(int level) {
 }
 
 void GraphicsDisplay::printScore(int score) {
-    window->fillRectangle(0,30,405,15,0);
+    window->fillRectangle(0,17,405,15,0);
     string sc = "Score:                    ";
     sc += to_string(score);
     window->drawString(50, 30, sc);
