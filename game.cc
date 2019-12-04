@@ -55,10 +55,12 @@ void Game::processDropCmd(int linesCleared, int board) {
 	if (board == 1) {
 		tmp = brd1.get();
 		tmp2 = brd2.get();
+		++brd1LastCleared;
 	}
 	else if (board == 2) {
 		tmp = brd2.get();
 		tmp2 = brd1.get();
+		++brd2LastCleared;
 	}
 
 	int score = tmp->getScore();
@@ -85,11 +87,11 @@ void Game::processDropCmd(int linesCleared, int board) {
 	int lastCleared = board == 1 ? brd1LastCleared : brd2LastCleared;
 	if (tmp->getLevel() == 4 && lastCleared % 5 == 0) {
 		if (board == 1) {
-			brd2 = make_shared<Force> (brd2, '.');
-			brd2->setSpecialEffect();
-		} else if (board == 2) {
 			brd1 = make_shared<Force> (brd1, '.');
 			brd1->setSpecialEffect();
+		} else if (board == 2) {
+			brd2 = make_shared<Force> (brd2, '.');
+			brd2->setSpecialEffect();
 		}
 	}
 
