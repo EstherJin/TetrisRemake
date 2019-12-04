@@ -88,15 +88,15 @@ void GraphicsDisplay::notify (Subject &whoNotified) {
 }
 
 void GraphicsDisplay::printLevel(int level) {
-    window->fillRectangle(0,0,405,1,0);
+    window->fillRectangle(0,0,405,15,0);
     string lvl = "Level:                    ";
     lvl += to_string(level);
     window->drawString(50, xmar, lvl);
 }
 
 void GraphicsDisplay::printScore(int score) {
-    window->fillRectangle(0,30,405,1,0);
-    string sc = "Score:                     ";
+    window->fillRectangle(0,30,405,15,0);
+    string sc = "Score:                    ";
     sc += to_string(score);
     window->drawString(50, 30, sc);
 }
@@ -124,7 +124,7 @@ void GraphicsDisplay::printNext (char next) {
                 break;
             case 'O':
                 window->fillRectangle(xmar,712, cellLength, cellLength, 5);
-                window->fillRectangle(xmar+cellLength,722,cellLength, cellLength, 5);
+                window->fillRectangle(xmar+cellLength,712,cellLength, cellLength, 5);
                 window->fillRectangle(xmar,712+cellLength, cellLength, cellLength, 5);
                 window->fillRectangle(xmar+cellLength,712+cellLength, cellLength, cellLength, 5);
                 break;
