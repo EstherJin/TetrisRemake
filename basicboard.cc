@@ -37,15 +37,17 @@ BasicBoard::BasicBoard(int player, bool random, int level, bool textOnly, string
 	else if (level == 4) lvl = make_unique<Level4> (seed);
 	else lvl = make_unique<NonRandom> (script, level);
 
-	gd.printLevel(level);
-	gd.printScore(score);
+	if (!textOnly) {
+		gd.printLevel(level);
+		gd.printScore(score);
+	}
 
 	getNextBlock();
 	currentBlock = nullptr;
 	std::swap(currentBlock, nextBlock);
-	gd.printNext(' ');
+	if (!textOnly) gd.printNext(' ');
 	currentBlock->attach(&sg);
-	currentBlock->attach(&gd);
+	if (!textOnly) currentBlock->attach(&gd);
 	currentBlock->notifCurrPos();
 }
 
@@ -114,6 +116,7 @@ int BasicBoard::dropBlock() {
 
 	// change to block 2
 	currentBlock->detach();
+	currentBlock->detach();
 	Block2 b2(4,lvl->getLevel());
 	activeBlocks.emplace_back(b2);
 	vector<Coordinates> blockCoords = currentBlock->getPos();
@@ -145,7 +148,7 @@ int BasicBoard::dropBlock() {
 			activeBlocks.erase(activeBlocks.begin() + i);
 		}
 	}
-	gd.printScore(score);
+	if (!textOnly) gd.printScore(score);
 
 	// switch blocks
 	currentBlock = nullptr;
@@ -158,7 +161,7 @@ int BasicBoard::dropBlock() {
 	}
 
 	currentBlock->attach(&sg);
-	currentBlock->attach(&gd);
+	if (!textOnly) currentBlock->attach(&gd);
 	currentBlock->notifCurrPos();
 
 	return linesCleared;
@@ -180,7 +183,7 @@ void BasicBoard::changeLevel(int direction, bool rand, string filename) {
 		else if (newLevel == 2) lvl = make_unique<Level2> (seed);
 		else if (newLevel == 3) lvl = make_unique<Level3> (seed);
 		else if (newLevel == 4) lvl = make_unique<Level4> (seed);
-		gd.printLevel(newLevel);
+		if (!textOnly) gd.printLevel(newLevel);
 	}
 }
 
@@ -230,6 +233,6 @@ void BasicBoard::changeCurrentBlock(char type) {
 	else if (type == 'Z') currentBlock = make_unique<Z>();
 	else currentBlock = make_unique<T>();
 	currentBlock->attach(&sg);
-	currentBlock->attach(&gd);
+	if (!textOnly) currentBlock->attach(&gd);
 	currentBlock->notifCurrPos();
 }
