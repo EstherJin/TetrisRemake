@@ -64,7 +64,7 @@ char NonRandom::nextBlock() { //use istringstream to load one char at a time and
 
 		}*/
 
-            sequence = sequence.substr(2);
+            sequence = sequence.substr(1);
             break;
         } else {
             ifstream f{fileName};
