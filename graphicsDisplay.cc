@@ -140,5 +140,7 @@ void GraphicsDisplay::printNext (char next) {
                 window->fillRectangle(xmar+2*cellLength,712+cellLength, cellLength, cellLength, 8);
                 window->fillRectangle(xmar+3*cellLength,712+cellLength, cellLength, cellLength, 8);
         }
+    } else {
+        window->fillRectangle(xmar, 712, 405, 150, 0);
     }
 }
