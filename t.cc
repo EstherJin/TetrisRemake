@@ -94,21 +94,21 @@ vector<Coordinates> T::turnPos(int shift){
   }
   while (shift > 0){
     if (position == 0){
-      coords.at(2).row -= 1;
-      coords.at(2).col -= 1;
+      cds.at(2).row -= 1;
+      cds.at(2).col -= 1;
     } else if (position == 1) {
-      coords.at(0).row += 1;
-      coords.at(2).row += 2;
-      coords.at(2).col += 1;
+      cds.at(0).row += 1;
+      cds.at(2).row += 2;
+      cds.at(2).col += 1;
     } else if (position == 2) {
-      coords.at(0).row -= 1;
-      coords.at(2).row -= 2;
-      coords.at(2).col -= 2;
-      coords.at(3).col -= 1;
+      cds.at(0).row -= 1;
+      cds.at(2).row -= 2;
+      cds.at(2).col -= 2;
+      cds.at(3).col -= 1;
     } else {
-      coords.at(2).row += 1;
-      coords.at(2).col += 2;
-      coords.at(3).col += 1;
+      cds.at(2).row += 1;
+      cds.at(2).col += 2;
+      cds.at(3).col += 1;
     }
     --shift;
   }
