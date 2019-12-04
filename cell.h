@@ -8,7 +8,6 @@ class Cell: public Subject {
   Coordinates coords;
  public:
   Cell(char type, int row, int col);
-  ~Cell();
   void clearCell();
   void changeCell(char changeTo);
   void changerow(int row);

@@ -6,13 +6,6 @@ Cell::Cell(char type, int row, int col): type{type}{
   coords = c;
 }
 
-Cell::~Cell(){
-  type = ' ';
-  State stat = {' ', coords, false};
-  setState(stat);
-  notifyObservers();
-}
-
 void Cell::clearCell(){
   type = ' ';
   State stat = {' ', coords, false};
