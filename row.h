@@ -13,6 +13,7 @@ class Row {
   void attachObserver(int col, Observer *ob);
   void detachObserver(int col);
   char at(int col);
+  void notifAbout();
 };
 
 #endif

@@ -12,7 +12,6 @@
 #include "t.h"
 #include "o.h"
 #include "l.h"
-#include "dot.h"
 #include "block2.h"
 #include "Level.h"
 #include "Level1.h"
@@ -137,6 +136,7 @@ int BasicBoard::dropBlock() {
 			for (int j = i; j >= 0; --j) {
 				grid[j].changeRowNum(j);
 			}
+			grid[i].notifAbout();
 			++i;
 		}
 	}
@@ -233,7 +233,6 @@ void BasicBoard::changeCurrentBlock(char type) {
 	else if (type == 'O') currentBlock = make_unique<O>();
 	else if (type == 'S') currentBlock = make_unique<S>();
 	else if (type == 'Z') currentBlock = make_unique<Z>();
-	else if (type == '.') currentBlock = make_unique<Dot>();
 	else currentBlock = make_unique<T>();
 	currentBlock->attach(&sg);
 	if (!textOnly) currentBlock->attach(&gd);

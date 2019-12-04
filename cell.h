@@ -13,6 +13,7 @@ class Cell: public Subject {
   void changeCell(char changeTo);
   void changerow(int row);
   char getChar();
+  void notif();
 };
 
 

@@ -40,3 +40,9 @@ void Cell::changerow(int row){
 char Cell::getChar(){
   return type;
 }
+
+void Cell::notif(){
+  stat = {type, coords, true};
+  setState(stat);
+  notifyObservers();
+}

@@ -5,7 +5,7 @@ Row::Row(int rowNum,  Observer *ob, Observer *ob2): rowNum{rowNum}{
   for(int i = 0; i < 11; ++i){
     Cell c = {' ', rowNum, i};
     c.attach(ob);
-	c.attach(ob2); 
+	  c.attach(ob2);
     roww.emplace_back(c);
   }
 }
@@ -39,4 +39,10 @@ void Row::detachObserver(int col){
 
 char Row::at(int col){
   return roww.at(col).getChar();
+}
+
+void Row::notifAbout(){
+  for(int i = 0; i < 11; ++i){
+    roww.at(i).notif();
+  }
 }
