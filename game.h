@@ -15,8 +15,8 @@ class Game {
 	unsigned seed;
 	std::shared_ptr<Board> brd1;
 	std::shared_ptr<Board> brd2;
-	int brd1LastCleared = 0;
-	int brd2LastCleared = 0;
+	// int brd1LastCleared = 0;
+	// int brd2LastCleared = 0;
 	TextDisplay td;
 	void processDropCmd(int linesCleared, int board);
 	void processWinner();

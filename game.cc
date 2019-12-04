@@ -76,7 +76,7 @@ void Game::processDropCmd(int linesCleared, int board) {
 			brd2 = temp->removeDecorator();
 		}
 	}
-
+/*
 	// update lines cleared
 	if (linesCleared > 0) {
 		if (board == 1) brd1LastCleared = 0;
@@ -94,6 +94,7 @@ void Game::processDropCmd(int linesCleared, int board) {
 			brd2->setSpecialEffect();
 		}
 	}
+	*/
 
 	// activate special effects if lines are cleared
 	if (linesCleared > 1) {
