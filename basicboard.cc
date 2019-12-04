@@ -136,7 +136,6 @@ int BasicBoard::dropBlock() {
 			grid.insert(grid.begin(), newRow);
 			for (int j = i; j >= 0; --j) {
 				grid[j].changeRowNum(j);
-				grid[i].notifAbout();
 			}
 			grid[i].notifAbout();
 			++i;
