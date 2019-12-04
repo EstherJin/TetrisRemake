@@ -42,7 +42,7 @@ char Cell::getChar(){
 }
 
 void Cell::notif(){
-  stat = {type, coords, true};
+  State stat = {type, coords, true};
   setState(stat);
   notifyObservers();
 }
