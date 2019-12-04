@@ -93,7 +93,7 @@ void Game::processDropCmd(int linesCleared, int board) {
 		}
 	}
 
-	// activate special effects if lines cleared
+	// activate special effects if lines are cleared
 	if (linesCleared > 1) {
 		cout << "Choose your special action" << endl;
 		while (true) {
