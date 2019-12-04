@@ -7,5 +7,5 @@ using namespace std;
 Blind::Blind(shared_ptr<Board> board): Decorator{board} {}
 
 string Blind::print(bool blind) {
-	board->print(true);
+	return board->print(true);
 }
