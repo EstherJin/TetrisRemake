@@ -109,36 +109,43 @@ void GraphicsDisplay::printNext (char next) {
                 window->fillRectangle(xmar+cellLength,712, cellLength, cellLength, 2);
                 window->fillRectangle(xmar+2*cellLength,712, cellLength, cellLength, 2);
                 window->fillRectangle(xmar+cellLength,712+cellLength, cellLength, cellLength, 2);
+                break;
             case 'L':
                 window->fillRectangle(xmar+2*cellLength,712, cellLength, cellLength, 3);
                 window->fillRectangle(xmar,712+cellLength, cellLength, cellLength, 3);
                 window->fillRectangle(xmar+cellLength,712+cellLength, cellLength, cellLength, 3);
                 window->fillRectangle(xmar+2*cellLength,712+cellLength, cellLength, cellLength, 3);
+                break;
             case 'Z':
                 window->fillRectangle(xmar,712, cellLength, cellLength, 4);
                 window->fillRectangle(xmar+cellLength,712, cellLength, cellLength, 4);
                 window->fillRectangle(xmar+cellLength,712+cellLength, cellLength, cellLength, 4);
                 window->fillRectangle(xmar+2*cellLength,712+cellLength, cellLength, cellLength, 4);
+                break;
             case 'O':
                 window->fillRectangle(xmar,712, cellLength, cellLength, 5);
                 window->fillRectangle(xmar+cellLength,722,cellLength, cellLength, 5);
                 window->fillRectangle(xmar,712+cellLength, cellLength, cellLength, 5);
                 window->fillRectangle(xmar+cellLength,712+cellLength, cellLength, cellLength, 5);
+                break;
             case 'S':
                 window->fillRectangle(xmar+cellLength,712, cellLength, cellLength, 6);
                 window->fillRectangle(xmar+2*cellLength,712, cellLength, cellLength, 6);
                 window->fillRectangle(xmar,712+cellLength, cellLength, cellLength, 6);
                 window->fillRectangle(xmar+cellLength,712+cellLength, cellLength, cellLength, 6);
+                break;
             case 'J':
                 window->fillRectangle(xmar,712, cellLength, cellLength, 7);
                 window->fillRectangle(xmar,712+cellLength, cellLength, cellLength, 7);
                 window->fillRectangle(xmar+cellLength,712+cellLength, cellLength, cellLength, 7);
                 window->fillRectangle(xmar+2*cellLength,712+cellLength, cellLength, cellLength, 7);
+                break;
             case 'I':
                 window->fillRectangle(xmar,712+cellLength, cellLength, cellLength, 8);
                 window->fillRectangle(xmar+cellLength,712+cellLength, cellLength, cellLength, 8);
                 window->fillRectangle(xmar+2*cellLength,712+cellLength, cellLength, cellLength, 8);
                 window->fillRectangle(xmar+3*cellLength,712+cellLength, cellLength, cellLength, 8);
+                break;
         }
     } else {
         window->fillRectangle(xmar, 712, 405, 150, 0);
