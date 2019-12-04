@@ -16,6 +16,9 @@ void Heavy::downBlock(int amount) {
 		if (valid) {
 			board->downBlock(1);
 		}
-		else board->dropBlock();
+		else {
+			int linesCleared = board->dropBlock();
+			throw linesCleared;
+		}
 	}
 }
