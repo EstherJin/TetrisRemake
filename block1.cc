@@ -77,3 +77,7 @@ void Block1::notifCurrPos(){
     notifyObservers();
   }
 }
+
+int Block1::getNum(){
+  return coords.size();
+}

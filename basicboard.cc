@@ -118,7 +118,7 @@ int BasicBoard::dropBlock() {
 	// change to block 2
 	currentBlock->detach();
 	if (!textOnly) currentBlock->detach();
-	Block2 b2(4,lvl->getLevel());
+	Block2 b2(currentBlock->getNum(),lvl->getLevel());
 	activeBlocks.emplace_back(b2);
 	vector<Coordinates> blockCoords = currentBlock->getPos();
   	for (auto coord:blockCoords) {
@@ -239,8 +239,4 @@ void BasicBoard::changeCurrentBlock(char type) {
 	currentBlock->attach(&sg);
 	if (!textOnly) currentBlock->attach(&gd);
 	currentBlock->notifCurrPos();
-}
-
-void BasicBoard::printGraphicsBlind() {
-	gd.blind();
 }
