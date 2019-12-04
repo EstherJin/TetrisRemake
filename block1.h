@@ -23,6 +23,7 @@ public:
   vector<Coordinates> getPos();
   bool origPos();
   virtual void notifCurrPos();
+  int getNum();
 };
 
 #endif
