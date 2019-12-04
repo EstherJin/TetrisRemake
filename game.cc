@@ -55,12 +55,12 @@ void Game::processDropCmd(int linesCleared, int board) {
 	if (board == 1) {
 		tmp = brd1.get();
 		tmp2 = brd2.get();
-		++brd1LastCleared;
+		//++brd1LastCleared;
 	}
 	else if (board == 2) {
 		tmp = brd2.get();
 		tmp2 = brd1.get();
-		++brd2LastCleared;
+		//++brd2LastCleared;
 	}
 
 	int score = tmp->getScore();
