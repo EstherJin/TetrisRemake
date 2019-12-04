@@ -199,6 +199,7 @@ void BasicBoard::getNextBlock() {
 		else if (type == 'S') nextBlock = make_unique<S>();
 		else if (type == 'Z') nextBlock = make_unique<Z>();
 		else nextBlock = make_unique<T>();
+		gd.printNext(' ');
 		gd.printNext(type);
 	}
 }
