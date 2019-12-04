@@ -38,7 +38,7 @@ BasicBoard::BasicBoard(int player, bool random, int level, bool textOnly, string
 	else lvl = make_unique<NonRandom> (script, level);
 
 	gd.printLevel(level);
-	gd.printScore(printScore);
+	gd.printScore(score);
 
 	getNextBlock();
 	currentBlock = nullptr;
