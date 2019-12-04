@@ -75,6 +75,24 @@ void Game::processDropCmd(int linesCleared, int board) {
 		}
 	}
 
+	// update lines cleared
+	if (linesCleared > 0) {
+		if (board == 1) brd1LastCleared = 0;
+		else brd2LastCleared = 0;
+	}
+
+	// add dot
+	int lastCleared = board == 1 ? brd1LastCleared : brd2LastCleared;
+	if (tmp->getLevel() == 4 && lastCleared % 5 == 0) {
+		if (board == 1) {
+			brd2 = make_shared<Force> (brd2, '.');
+			brd2->setSpecialEffect();
+		} else if (board == 2) {
+			brd1 = make_shared<Force> (brd1, '.');
+			brd1->setSpecialEffect();
+		}
+	}
+
 	// activate special effects if lines cleared
 	if (linesCleared > 1) {
 		cout << "Choose your special action" << endl;
